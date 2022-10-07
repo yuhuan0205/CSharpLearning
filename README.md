@@ -87,3 +87,33 @@ private enum IndexOfField:int
 int x  = (int)IndexOfField.StockId;
 // x == 1;
 ```
+
+單例模式：
+```C#
+public class Singleton
+{
+ //定義一個靜態變數儲存類的例項
+	 private static Singleton singleton;
+
+	 /// <summary>
+	 /// 定義私有建構函式
+	 /// </summary>
+	 private Singleton()
+	 {
+	 }
+
+	 /// <summary>
+	 /// 定義公有方法提供一個全域性訪問點,同時你也可以定義公有屬性來提供全域性訪問點
+	 /// </summary>
+	 /// <returns></returns>
+	 public static Singleton GetSingleton()
+	 {
+	     // 如果類的例項不存在則建立，否則直接返回
+	     if (singleton==null)
+	     {
+		 singleton = new Singleton();
+	     }
+	     return singleton;
+	 }
+}
+```
