@@ -1,5 +1,7 @@
 # C# Learning Note
 
+以下紀錄在CMoney工程部新人訓練時期所學到的知識。
+
 ## C# Knowledge
 **專案結構：**`方案 -> 專案 -> 組件 -> 命名空間 -> CS檔 -> 類別 -> 類別成員`
 
@@ -12,8 +14,10 @@
 ## Coding Style
 * 所有類別成員都在建構子的地方new出來（static, const等等例外）。
 * 只使用C#內建型別， int, string, double，而不是System.Int64, String....
-* 類別成員命名方式為每個單字開頭都大寫如，string ClientDataInfo。
-* 常數命名方式為全大寫，如： `const int CONST;`
+* 類別成員命名方式為每個單字開頭都大寫如，`string ClientDataInfo;`。
+* 區域變數，方法參數駝式命名，如：`clientPassword`。
+* 常數命名方式為全大寫配底線分隔，如： `const int CLIENT_ID;`。
+* 方法用動詞開頭，bool用 Is 或 Has 開頭如，如：`bool IsValid`。
 * 發佈新版本記得改組件資訊的版本日期。
 * 避免使用Magic Number 的方法：
 	* 列舉(enum)
@@ -21,6 +25,8 @@
 	* Variable
 * 避免複製貼上(思考如何抽取方法)
 * 共用項目使用 static class 來讓全部的人都能使用
+* 用`string.Empty;`來表示空字串，而不是`"";`。
+* 在註解中使用`//TODO： //UNDONE： //HACK：`
 
 ## Other Tips
 WPF 排版與HTML很接近
