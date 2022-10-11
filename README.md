@@ -117,3 +117,28 @@ public class Singleton
 	 }
 }
 ```
+實現stable sort
+```C#
+public class class1:IComparable<class1>
+{
+	public int Value {get; set;}
+	public int SortIndex {get; set;}
+	public class1()
+	{
+	}
+	public CompareTo(class1 other)
+	{
+		int result;
+		result = this.Value.CompareTo(other.Value);
+		if(result == 0)
+		{
+			result = this.SortIndex.CompareTo(other.SortIndex);
+		}
+		return resultl;
+	}
+}
+```
+
+
+
+
