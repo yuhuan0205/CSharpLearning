@@ -138,7 +138,30 @@ public class class1:IComparable<class1>
 	}
 }
 ```
+BackgroundWorker使用方式
+先在工具箱中把BackgroundWorker (name : BW1)設定到winform上
+接著再設定BW1的事件(DoWork, RunWorkerCompleted)
+```C#
+ private void BtnClick(object sender, EventArgs e)
+        {
+	    int x = 0;
+            BW1.RunWorkerAsync(x);
+        }
 
+private void BW1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+	{
+		//get argument, and return output
+		return DoSomething(e.Argument);
+	}
+	
+private void BW1_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        {
+            //when BW1's task done, this function will get result.
+	    var result = e.Result;
+	    // rendering data here.
+	    text1.Text = result
+        }
+```
 
 
 
