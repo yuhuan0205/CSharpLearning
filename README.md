@@ -162,6 +162,55 @@ private void BW1_RunWorkerCompleted(object sender, System.ComponentModel.RunWork
 	    text1.Text = result
         }
 ```
+多型的使用時機及實現方式
+```C#
+//AbstractBtn.cs
+public abstract partial class AbstractBtn : Button
+    {
+        public AbstractBtn()
+        {
+        }
 
+        public abstract void OnClick();
+        
+        public string ButtonText
+        {
+            get { return this.Text; }
+            set
+            {
+                this.Text = value;
+            }
+        }
+    }
+//NumbersBtn.cs
+public class NumbersBtn : AbstractBtn
+{
+	public override void OnClick()
+	{
+	    Computer.Builder.Append(ButtonText);
+	    Computer.Show = Computer.Builder.ToString();
+	}
+}
+//PlausBtn
+public class PlausBtn : AbstractBtn
+{
+	public override void OnClick()
+        {
+            Computer.Buffer = Computer.Buffer + Convert.ToDecimal(Computer.Show);
+            Computer.Operator = "+";
+            Computer.Builder.Clear();
+        }
+}
+
+//main.cs
+//.....
+private void Button_Click(object sender, EventArgs e)
+        {
+            ((AbstractBtn)sender).OnClick();
+            
+            ResultShow.Text = $"{Computer.Buffer}{Computer.Operator}{Environment.NewLine}{Computer.Show}";
+        }
+//.....
+```
 
 
