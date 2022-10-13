@@ -212,5 +212,8 @@ private void Button_Click(object sender, EventArgs e)
         }
 //.....
 ```
+virtual v.s. abstract
+* 虛擬(virtual)方法可以實作並且允許繼承的子類別複寫。
+* abstract 方法則是一定要在子類實作。
 
 
