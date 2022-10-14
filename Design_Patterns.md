@@ -1,3 +1,4 @@
+# [Home Page](https://github.com/yuhuan0205/CSharpLearning)
 # SOLID
 ## SRP 單一職責原則
 若發生多於一個原因使我們想要去改變一個類別，那麼該類別就有多於一個以上的職責。
