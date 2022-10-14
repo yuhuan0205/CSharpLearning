@@ -13,6 +13,8 @@
 
 **C#輸出類型** `WindowsApp(如winform, WPF等等)，主控台應用程式(console)，類別庫(dll)`
 
+**abstract v.s. interface** `共同的方法及成員寫在抽象裡，特別需要實現的方法則寫在interface，讓需要實作的類別去實作。`
+
 ## Coding Style
 * 所有類別成員都在建構子的地方new出來（static, const等等例外）。
 * 只使用C#內建型別， int, string, double，而不是System.Int64, String....
