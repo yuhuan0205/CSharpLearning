@@ -2,6 +2,8 @@
 
 以下紀錄在CMoney工程部新人訓練時期所學到的知識。
 
+[設計模式筆記](https://github.com/yuhuan0205/CSharpLearning/blob/main/Design_Patterns.md)
+
 ## C# Knowledge
 **專案結構：**`方案 -> 專案 -> 組件 -> 命名空間 -> CS檔 -> 類別 -> 類別成員`
 
