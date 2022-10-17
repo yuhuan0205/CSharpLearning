@@ -38,6 +38,11 @@ namespace CsvReaderWFCodingStyleVertion
         public bool IsValid { get; set; }
 
         /// <summary>
+        /// 
+        /// </summary>
+        private readonly char spliter;
+
+        /// <summary>
         /// constructor
         /// </summary>
         /// <param name="fileStream">raw data of csv from file stream</param>
@@ -59,7 +64,6 @@ namespace CsvReaderWFCodingStyleVertion
         {
             string[] transactionString;
             string line;
-            char spliter = ',';
             int stockId = TableInfo.STOCK_ID;
             while ((line = Reader.ReadLine()) != null)
             {
