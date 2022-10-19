@@ -11,23 +11,7 @@
         /// every child class should implement this abstract function.
         /// it makes each button has its own OnClick function.
         /// </summary>
+        /// <param name="calculator">a calculator implemented ICalculator</param>
         public abstract void OnClick(ICalculator calculator);
-
-        
-        /// <summary>
-        /// button's text. 
-        /// </summary>
-        public string ButtonText
-        {
-            get 
-            { 
-                return this.Text; 
-            }
-
-            set
-            {
-                this.Text = value;
-            }
-        }
     }
 }

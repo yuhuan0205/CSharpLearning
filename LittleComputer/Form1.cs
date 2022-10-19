@@ -8,17 +8,23 @@ namespace LittleComputer
     /// </summary>
     public partial class Form1 : Form
     {
-        public ICalculator Calculator { get; set; }
         /// <summary>
-        /// Form init, Computer init.
+        /// a object implemented ICalculator. In order to compute.
+        /// </summary>
+        public ICalculator Calculator { get; set; }
+
+        /// <summary>
+        /// Form init, Calculator init.
         /// </summary>
         public Form1()
         {
-            //Computer.Init();
             InitializeComponent();
             InitMembers();
         }
 
+        /// <summary>
+        /// new a object which implement ICalculator.
+        /// </summary>
         private void InitMembers()
         {
             Calculator = new MyCalculator();
@@ -33,7 +39,11 @@ namespace LittleComputer
         {
             //Polymorphism, in order to use different type of buttons.
             ((AbstractBtn)sender).OnClick(Calculator);
+
+            //get status change after button clicked.
             MessageObject message = Calculator.GetStatus();
+            
+            //render data to winform.
             InputNumber.Text = message.InputNumber;
             CaculatedProcess.Text = message.CalculatedProcess;
         }

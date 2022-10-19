@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace LittleComputer
+﻿namespace LittleComputer
 {
+    /// <summary>
+    /// a class contains all const variable.
+    /// </summary>
     public class Consts
     {
         /// <summary>
@@ -55,5 +54,25 @@ namespace LittleComputer
         /// Point
         /// </summary>
         public const string POINT = ".";
+
+        /// <summary>
+        /// a const int represent False Condition.
+        /// </summary>
+        public const int FALSE = 0;
+
+        /// <summary>
+        /// a const int represent True Condition.
+        /// </summary>
+        public const int TRUE = 1;
+
+        /// <summary>
+        /// a const int to lock zero typed in.
+        /// </summary>
+        public const int LOCKED = 0;
+
+        /// <summary>
+        /// a const int to unlock zero typed in.
+        /// </summary>
+        public const int UNLOCKED = -1;
     }
 }

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace LittleComputer
+﻿namespace LittleComputer
 {
     /// <summary>
     /// a button that user can type digits into Computer.
@@ -10,9 +8,10 @@ namespace LittleComputer
         /// <summary>
         /// override AbstractBtn's OnClick.
         /// </summary>
+        /// <param name="calculator">a calculator implemented ICalculator</param>
         public override void OnClick(ICalculator calculator)
         {
-            calculator.ClickDigitBtn(ButtonText);
+            calculator.ClickDigitBtn(Text);
         }
     }
 }
