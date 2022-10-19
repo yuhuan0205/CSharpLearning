@@ -4,6 +4,8 @@
 
 [設計模式筆記](https://github.com/yuhuan0205/CSharpLearning/blob/main/Design_Patterns.md)
 
+[Useful Link](https://github.com/yuhuan0205/CSharpLearning/blob/main/Useful_Link.md)
+
 ## C# Knowledge
 **專案結構：**`方案 -> 專案 -> 組件 -> 命名空間 -> CS檔 -> 類別 -> 類別成員`
 
