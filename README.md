@@ -17,6 +17,8 @@
 
 **abstract v.s. interface** `共同的方法及成員寫在抽象裡，特別需要實現的方法則寫在interface，讓需要實作的類別去實作。`
 
+**URL傳遞** `在傳遞URL的時候，可能會出現特殊字元，如 + / % ? 等等，這時就得使用特殊的表達方式 + --> %2B  / --> %2F 等等。`
+
 ## Coding Style
 * 所有類別成員都在建構子的地方new出來（static, const等等例外）。
 * 只使用C#內建型別， int, string, double，而不是System.Int64, String....
@@ -52,10 +54,14 @@ C# 中，計時要 using System.Diagnostics; 用其中的Stopwatch物件。
 
 winform 元件屬性可以在右側選單快速調整
 
+winform button 可以在 Tag 設定 隱藏的 value
+
 時間格式利用 TimeSpan 來做，以下為formating的方式。
 string.Format("{0:D2}:{1:D2}:{2:D1}:{3:D2}", t.Hours, t.Minutes, t.Seconds, t.Milliseconds)
 
 textBox新增一行 用 TextBox.appendText( string +  Environment.NewLine ) 
+
+textBox可以設定ReadOnly
 
 C# async 邏輯 (非常重要！)
 ```C#
