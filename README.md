@@ -19,6 +19,8 @@
 
 **URL傳遞** `在傳遞URL的時候，可能會出現特殊字元，如 + / % ? 等等，這時就得使用特殊的表達方式 + --> %2B  / --> %2F 等等。`
 
+**Json處理** https://learn.microsoft.com/zh-tw/dotnet/standard/serialization/system-text-json/how-to?pivots=dotnet-core-3-1
+
 ## Coding Style
 * 所有類別成員都在建構子的地方new出來（static, const等等例外）。
 * 只使用C#內建型別， int, string, double，而不是System.Int64, String....
@@ -35,6 +37,10 @@
 * 共用項目使用 static class 來讓全部的人都能使用
 * 用`string.Empty;`來表示空字串，而不是`"";`。
 * 在註解中使用`//TODO： //UNDONE： //HACK：`
+
+## ASP.Net 
+
+使用DI的方式將物件註冊到 Controller 中，因每一次呼叫API都會 new 新的 Controller，所以需要再 startup.cs 中 addSingleton(yourService)，之後再到Controller中注入成員。
 
 ## Other Tips
 WPF 排版與HTML很接近
