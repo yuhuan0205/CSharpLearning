@@ -4,6 +4,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using CalculatorAPI.Elements;
 
 namespace CalculatorAPI
 {
@@ -42,9 +43,9 @@ namespace CalculatorAPI
             State = new InitialState(Memory);
         }
 
-        public void AddCalculatedProcess(string Operator)
+        public void AddCalculatedProcess(IElement element)
         {
-            State = State.AddCalculatedProcess(Operator);
+            State = State.AddCalculatedProcess(element);
         }
 
         public void ResetCalculatedProcess()
@@ -77,19 +78,23 @@ namespace CalculatorAPI
 
         public void GetResult()
         {
-            ICompute computeEnging = new ComputingTree();
-            computeEnging.GetResult(Memory.GetCalculatedProcess());
+            NumberElement number = new NumberElement(Memory.GetDigits());
+            Memory.AddElement(number);
+            IEngine computeEnging = new EngineTree(Memory.GetInfix());
+            MessageObject message =  computeEnging.GetResult();
+            Memory.SetDigits(message.InputNumber);
+            Memory.SetCalculatedProcess(message.CalculatedProcess);
             State = new EqualState(Memory);
         }
 
-        public void AddLeftParenthese()
+        public void AddLeftParenthese(IElement element)
         {
-            State = State.AddLeftParenthese();
+            State = State.AddLeftParenthese(element);
         }
 
-        public void AddRightParenthese()
+        public void AddRightParenthese(IElement element)
         {
-            State = State.AddRightParenthese();
+            State = State.AddRightParenthese(element);
         }
     }
 }

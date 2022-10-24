@@ -1,4 +1,5 @@
-﻿using CalculatorAPI.Interfaces;
+﻿using CalculatorAPI.Elements;
+using CalculatorAPI.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,35 +11,47 @@ namespace CalculatorAPI.States
     {
         private IMemory Memory;
 
-        public InitialState(IMemory memory)
+        public RightParentheseState(IMemory memory)
         {
             Memory = memory;
         }
 
-        public IState AddCalculatedProcess(string Operator)
+        public IState AddCalculatedProcess(IElement element)
         {
-            Memory.AddOperand();
-            Memory.AddOperator(Operator);
+            NumberElement number = new NumberElement(Memory.GetDigits());
+            Memory.AddElement(element);
             return new OperatingState(Memory);
         }
 
         public IState AddDigit(string digit)
         {
-            Memory.ClearDigits();
-            Memory.AddDigit(digit);
-            return new NormalState(Memory);
+            return this;
         }
 
         public IState AddDigitZero()
         {
-            Memory.SetDigits(Consts.ZERO_STRING);
+            return this;
+        }
+
+        public IState AddLeftParenthese(IElement element)
+        {
             return this;
         }
 
         public IState AddPoint()
         {
-            Memory.AddDigit(Consts.POINT);
-            return new DecimalState(Memory);
+            return this;
+        }
+
+        public IState AddRightParenthese(IElement element)
+        {
+            for (; Memory.GetParentheseCounts() != 0;)
+            {
+                Memory.AddElement(new RightParenthese());
+                Memory.SetParentheseCounts(Memory.GetParentheseCounts() - Consts.ONE);
+                return new RightParentheseState(Memory);
+            }
+            return this;
         }
 
         public IState Backspace()
@@ -48,14 +61,14 @@ namespace CalculatorAPI.States
 
         public IState ChangeSign()
         {
-            Memory.SetDigits((Convert.ToDecimal(Memory.GetDigits()) * -1).ToString());
+            //Memory.SetDigits((Convert.ToDecimal(Memory.GetDigits()) * -1).ToString());
             return this;
         }
 
         public IState SquareRoot()
         {
-            double root = Math.Sqrt(Convert.ToDouble(Memory.GetDigits()));
-            Memory.SetDigits(root.ToString());
+            //double root = Math.Sqrt(Convert.ToDouble(Memory.GetDigits()));
+            //Memory.SetDigits(root.ToString());
             return this;
         }
     }

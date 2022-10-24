@@ -8,7 +8,8 @@ namespace CalculatorAPI.Interfaces
     public interface IElement
     {
         public int GetPriority();
-        public decimal DoOperation();
+        public decimal DoOperation(decimal firstNumber, decimal secondNumber);
         public decimal GetValue();
+        public string GetValueString();
     }
 }

@@ -6,28 +6,19 @@ using CalculatorAPI.Interfaces;
 
 namespace CalculatorAPI.Elements
 {
-    public class Divider : IElement
+    public class LeftParenthese : IElement
     {
-        private string ValueString;
+        public string ValueString;
 
-        private int Priority;
-
-        public Divider()
+        public int Priority;
+        public LeftParenthese()
         {
-            ValueString = Consts.DIVIDE_SIGN;
-            Priority = Consts.PRIORITY_OPERTOR_HIGH;
+            ValueString = Consts.LEFT_PARENTHESE;
+            Priority = Consts.PRIORITY_LEFT_PARENTHESE;
         }
-
         public decimal DoOperation(decimal firstNumber, decimal secondNumber)
         {
-            try
-            {
-                return firstNumber / secondNumber;
-            }
-            catch (DivideByZeroException)
-            {
-                return firstNumber;
-            }
+            return 0;
         }
 
         public int GetPriority()

@@ -5,12 +5,12 @@ namespace CalculatorAPI.Interfaces
     {
         public IState AddDigit(string digit);
         public IState AddDigitZero();
-        public IState AddCalculatedProcess(string Operator);
+        public IState AddCalculatedProcess(IElement element);
         public IState Backspace();
         public IState ChangeSign();
         public IState SquareRoot();
         public IState AddPoint();
-        public IState AddLeftParenthese();
-        public IState AddRightParenthese();
+        public IState AddLeftParenthese(IElement element);
+        public IState AddRightParenthese(IElement element);
     }
 }

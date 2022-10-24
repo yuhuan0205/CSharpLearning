@@ -1,4 +1,5 @@
-﻿using CalculatorAPI.Interfaces;
+﻿using CalculatorAPI.Elements;
+using CalculatorAPI.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,10 +16,10 @@ namespace CalculatorAPI.States
             Memory = memory;
         }
 
-        public IState AddCalculatedProcess(string Operator)
+        public IState AddCalculatedProcess(IElement element)
         {
             Memory.RemoveLastOperator();
-            Memory.AddOperator(Operator);
+            Memory.AddElement(element);
             return this;
         }
 
@@ -36,12 +37,32 @@ namespace CalculatorAPI.States
             return new InitialState(Memory);
         }
 
+        public IState AddLeftParenthese(IElement element)
+        {
+            Memory.AddElement(element);
+            Memory.SetParentheseCounts(Memory.GetParentheseCounts() + Consts.ONE);
+            return new LeftParentheseState(Memory);
+        }
+
         public IState AddPoint()
         {
             Memory.ClearDigits();
             Memory.AddDigit(Consts.ZERO_STRING);
             Memory.AddDigit(Consts.POINT);
             return new DecimalState(Memory);
+        }
+
+        public IState AddRightParenthese(IElement element)
+        {
+            for (; Memory.GetParentheseCounts() != 0;)
+            {
+                NumberElement number = new NumberElement(Memory.GetDigits());
+                Memory.AddElement(number);
+                Memory.AddElement(element);
+                Memory.SetParentheseCounts(Memory.GetParentheseCounts() - Consts.ONE);
+                return new RightParentheseState(Memory);
+            }
+            return this;
         }
 
         public IState Backspace()

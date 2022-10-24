@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 
 namespace CalculatorAPI.Interfaces
 {
-    public interface ICompute
+    public interface IEngine
     {
-        public MessageObject GetResult(string calculatedProcess);
+        public MessageObject GetResult();
     }
 }

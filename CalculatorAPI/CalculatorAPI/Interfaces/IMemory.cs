@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CalculatorAPI.Interfaces;
 
 namespace CalculatorAPI
 {
@@ -13,10 +14,12 @@ namespace CalculatorAPI
         public void RemoveLastDigit();
         public void ClearDigits();
         public string GetCalculatedProcess();
-        public void AddOperator(string Operator);
+        public void AddElement(IElement element);
         public void RemoveLastOperator();
-        public void AddOperand();
         public void ClearCalculatedProcess();
         public void SetCalculatedProcess(string calculatedProcess);
+        public int GetParentheseCounts();
+        public void SetParentheseCounts(int counts);
+        public List<IElement> GetInfix();
     }
 }

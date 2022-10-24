@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using CalculatorAPI.Elements;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -52,11 +53,32 @@ namespace CalculatorAPI.Controllers
             calculator.AddDigitZero();
         }
 
-        [HttpGet("operator/{id:int}/{Operator}")]
-        public void OperatorBtnClick(int id, string Operator)
+        [HttpGet("add/{id:int}")]
+        public void AddBtnClick(int id)
         {
             ICalculator calculator = CalculatorPool.GetCalculatorById(id);
-            calculator.AddCalculatedProcess(Operator);
+            calculator.AddCalculatedProcess(new Adder());
+        }
+
+        [HttpGet("minus/{id:int}")]
+        public void MinusBtnClick(int id)
+        {
+            ICalculator calculator = CalculatorPool.GetCalculatorById(id);
+            calculator.AddCalculatedProcess(new Minuser());
+        }
+
+        [HttpGet("multipy/{id:int}")]
+        public void MultipyBtnClick(int id)
+        {
+            ICalculator calculator = CalculatorPool.GetCalculatorById(id);
+            calculator.AddCalculatedProcess(new Multipyer());
+        }
+
+        [HttpGet("divide/{id:int}")]
+        public void DivideBtnClick(int id)
+        {
+            ICalculator calculator = CalculatorPool.GetCalculatorById(id);
+            calculator.AddCalculatedProcess(new Divider());
         }
 
         [HttpGet("backspace/{id:int}")]
@@ -115,14 +137,14 @@ namespace CalculatorAPI.Controllers
         public void LeftParentheseBtnClick(int id)
         {
             ICalculator calculator = CalculatorPool.GetCalculatorById(id);
-            calculator.AddLeftParenthese();
+            calculator.AddLeftParenthese(new LeftParenthese());
         }
 
         [HttpGet("rightparenthese/{id:int}")]
         public void RightParentheseBtnClick(int id)
         {
             ICalculator calculator = CalculatorPool.GetCalculatorById(id);
-            calculator.AddRightParenthese();
+            calculator.AddRightParenthese(new RightParenthese());
         }
     }
 }

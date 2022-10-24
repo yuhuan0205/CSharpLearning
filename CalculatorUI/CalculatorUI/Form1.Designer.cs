@@ -38,11 +38,7 @@
             this.numbersBtn8 = new CalculatorUI.DigitBtn();
             this.numbersBtn9 = new CalculatorUI.DigitBtn();
             this.numbersBtn10 = new CalculatorUI.ZeroBtn();
-            this.plausBtn1 = new CalculatorUI.OperatorBtn();
             this.equalBtn1 = new CalculatorUI.EqualBtn();
-            this.minusBtn1 = new CalculatorUI.OperatorBtn();
-            this.multiplyBtn1 = new CalculatorUI.OperatorBtn();
-            this.divideBtn1 = new CalculatorUI.OperatorBtn();
             this.ceBtn1 = new CalculatorUI.Btns.CEBtn();
             this.cBtn1 = new CalculatorUI.Btns.CBtn();
             this.backSpaceBtn1 = new CalculatorUI.Btns.BackSpaceBtn();
@@ -51,6 +47,12 @@
             this.InputNumber = new System.Windows.Forms.RichTextBox();
             this.CaculatedProcess = new System.Windows.Forms.RichTextBox();
             this.squareRootBtn1 = new CalculatorUI.Btns.SquareRootBtn();
+            this.leftParentheseBtn1 = new CalculatorUI.LeftParentheseBtn();
+            this.rightParentheseBtn1 = new CalculatorUI.RightParentheseBtn();
+            this.addBtn1 = new CalculatorUI.AddBtn();
+            this.minusBtn1 = new CalculatorUI.MinusBtn();
+            this.multipysBtn1 = new CalculatorUI.MultipysBtn();
+            this.dividesBtn1 = new CalculatorUI.DividesBtn();
             this.SuspendLayout();
             // 
             // numbersBtn1
@@ -163,18 +165,6 @@
             this.numbersBtn10.UseVisualStyleBackColor = true;
             this.numbersBtn10.Click += new System.EventHandler(this.Button_Click);
             // 
-            // plausBtn1
-            // 
-            this.plausBtn1.Font = new System.Drawing.Font("Microsoft JhengHei UI", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.plausBtn1.Location = new System.Drawing.Point(309, 421);
-            this.plausBtn1.Name = "plausBtn1";
-            this.plausBtn1.Size = new System.Drawing.Size(82, 37);
-            this.plausBtn1.TabIndex = 11;
-            this.plausBtn1.Tag = "%2B";
-            this.plausBtn1.Text = "+";
-            this.plausBtn1.UseVisualStyleBackColor = true;
-            this.plausBtn1.Click += new System.EventHandler(this.Button_Click);
-            // 
             // equalBtn1
             // 
             this.equalBtn1.Font = new System.Drawing.Font("Microsoft JhengHei UI", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
@@ -185,42 +175,6 @@
             this.equalBtn1.Text = "=";
             this.equalBtn1.UseVisualStyleBackColor = true;
             this.equalBtn1.Click += new System.EventHandler(this.Button_Click);
-            // 
-            // minusBtn1
-            // 
-            this.minusBtn1.Font = new System.Drawing.Font("Microsoft JhengHei UI", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.minusBtn1.Location = new System.Drawing.Point(309, 367);
-            this.minusBtn1.Name = "minusBtn1";
-            this.minusBtn1.Size = new System.Drawing.Size(82, 37);
-            this.minusBtn1.TabIndex = 14;
-            this.minusBtn1.Tag = "-";
-            this.minusBtn1.Text = "-";
-            this.minusBtn1.UseVisualStyleBackColor = true;
-            this.minusBtn1.Click += new System.EventHandler(this.Button_Click);
-            // 
-            // multiplyBtn1
-            // 
-            this.multiplyBtn1.Font = new System.Drawing.Font("Microsoft JhengHei UI", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.multiplyBtn1.Location = new System.Drawing.Point(309, 312);
-            this.multiplyBtn1.Name = "multiplyBtn1";
-            this.multiplyBtn1.Size = new System.Drawing.Size(82, 37);
-            this.multiplyBtn1.TabIndex = 16;
-            this.multiplyBtn1.Tag = "*";
-            this.multiplyBtn1.Text = "×";
-            this.multiplyBtn1.UseVisualStyleBackColor = true;
-            this.multiplyBtn1.Click += new System.EventHandler(this.Button_Click);
-            // 
-            // divideBtn1
-            // 
-            this.divideBtn1.Font = new System.Drawing.Font("Microsoft JhengHei UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.divideBtn1.Location = new System.Drawing.Point(309, 255);
-            this.divideBtn1.Name = "divideBtn1";
-            this.divideBtn1.Size = new System.Drawing.Size(82, 42);
-            this.divideBtn1.TabIndex = 17;
-            this.divideBtn1.Tag = "%5C";
-            this.divideBtn1.Text = "÷";
-            this.divideBtn1.UseVisualStyleBackColor = true;
-            this.divideBtn1.Click += new System.EventHandler(this.Button_Click);
             // 
             // ceBtn1
             // 
@@ -310,11 +264,83 @@
             this.squareRootBtn1.UseVisualStyleBackColor = true;
             this.squareRootBtn1.Click += new System.EventHandler(this.Button_Click);
             // 
+            // leftParentheseBtn1
+            // 
+            this.leftParentheseBtn1.Font = new System.Drawing.Font("Microsoft JhengHei UI", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.leftParentheseBtn1.Location = new System.Drawing.Point(111, 194);
+            this.leftParentheseBtn1.Name = "leftParentheseBtn1";
+            this.leftParentheseBtn1.Size = new System.Drawing.Size(82, 42);
+            this.leftParentheseBtn1.TabIndex = 27;
+            this.leftParentheseBtn1.Text = "(";
+            this.leftParentheseBtn1.UseVisualStyleBackColor = true;
+            this.leftParentheseBtn1.Click += new System.EventHandler(this.Button_Click);
+            // 
+            // rightParentheseBtn1
+            // 
+            this.rightParentheseBtn1.Font = new System.Drawing.Font("Microsoft JhengHei UI", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.rightParentheseBtn1.Location = new System.Drawing.Point(212, 194);
+            this.rightParentheseBtn1.Name = "rightParentheseBtn1";
+            this.rightParentheseBtn1.Size = new System.Drawing.Size(82, 42);
+            this.rightParentheseBtn1.TabIndex = 28;
+            this.rightParentheseBtn1.Text = ")";
+            this.rightParentheseBtn1.UseVisualStyleBackColor = true;
+            this.rightParentheseBtn1.Click += new System.EventHandler(this.Button_Click);
+            // 
+            // addBtn1
+            // 
+            this.addBtn1.Font = new System.Drawing.Font("Microsoft JhengHei UI", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.addBtn1.Location = new System.Drawing.Point(309, 421);
+            this.addBtn1.Name = "addBtn1";
+            this.addBtn1.Size = new System.Drawing.Size(82, 37);
+            this.addBtn1.TabIndex = 29;
+            this.addBtn1.Text = "+";
+            this.addBtn1.UseVisualStyleBackColor = true;
+            this.addBtn1.Click += new System.EventHandler(this.Button_Click);
+            // 
+            // minusBtn1
+            // 
+            this.minusBtn1.Font = new System.Drawing.Font("Microsoft JhengHei UI", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.minusBtn1.Location = new System.Drawing.Point(309, 367);
+            this.minusBtn1.Name = "minusBtn1";
+            this.minusBtn1.Size = new System.Drawing.Size(82, 37);
+            this.minusBtn1.TabIndex = 30;
+            this.minusBtn1.Text = "-";
+            this.minusBtn1.UseVisualStyleBackColor = true;
+            this.minusBtn1.Click += new System.EventHandler(this.Button_Click);
+            // 
+            // multipysBtn1
+            // 
+            this.multipysBtn1.Font = new System.Drawing.Font("Microsoft JhengHei UI", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.multipysBtn1.Location = new System.Drawing.Point(309, 312);
+            this.multipysBtn1.Name = "multipysBtn1";
+            this.multipysBtn1.Size = new System.Drawing.Size(82, 37);
+            this.multipysBtn1.TabIndex = 31;
+            this.multipysBtn1.Text = "×";
+            this.multipysBtn1.UseVisualStyleBackColor = true;
+            this.multipysBtn1.Click += new System.EventHandler(this.Button_Click);
+            // 
+            // dividesBtn1
+            // 
+            this.dividesBtn1.Font = new System.Drawing.Font("Microsoft JhengHei UI", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.dividesBtn1.Location = new System.Drawing.Point(309, 255);
+            this.dividesBtn1.Name = "dividesBtn1";
+            this.dividesBtn1.Size = new System.Drawing.Size(82, 42);
+            this.dividesBtn1.TabIndex = 32;
+            this.dividesBtn1.Text = "÷";
+            this.dividesBtn1.UseVisualStyleBackColor = true;
+            this.dividesBtn1.Click += new System.EventHandler(this.Button_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(406, 524);
+            this.Controls.Add(this.dividesBtn1);
+            this.Controls.Add(this.multipysBtn1);
+            this.Controls.Add(this.minusBtn1);
+            this.Controls.Add(this.addBtn1);
+            this.Controls.Add(this.rightParentheseBtn1);
+            this.Controls.Add(this.leftParentheseBtn1);
             this.Controls.Add(this.squareRootBtn1);
             this.Controls.Add(this.CaculatedProcess);
             this.Controls.Add(this.InputNumber);
@@ -323,11 +349,7 @@
             this.Controls.Add(this.backSpaceBtn1);
             this.Controls.Add(this.cBtn1);
             this.Controls.Add(this.ceBtn1);
-            this.Controls.Add(this.divideBtn1);
-            this.Controls.Add(this.multiplyBtn1);
-            this.Controls.Add(this.minusBtn1);
             this.Controls.Add(this.equalBtn1);
-            this.Controls.Add(this.plausBtn1);
             this.Controls.Add(this.numbersBtn10);
             this.Controls.Add(this.numbersBtn9);
             this.Controls.Add(this.numbersBtn8);
@@ -356,11 +378,7 @@
         private DigitBtn numbersBtn8;
         private DigitBtn numbersBtn9;
         private ZeroBtn numbersBtn10;
-        private OperatorBtn plausBtn1;
         private EqualBtn equalBtn1;
-        private OperatorBtn minusBtn1;
-        private OperatorBtn multiplyBtn1;
-        private OperatorBtn divideBtn1;
         private Btns.CEBtn ceBtn1;
         private Btns.CBtn cBtn1;
         private Btns.BackSpaceBtn backSpaceBtn1;
@@ -369,6 +387,12 @@
         private System.Windows.Forms.RichTextBox InputNumber;
         private System.Windows.Forms.RichTextBox CaculatedProcess;
         private Btns.SquareRootBtn squareRootBtn1;
+        private LeftParentheseBtn leftParentheseBtn1;
+        private RightParentheseBtn rightParentheseBtn1;
+        private AddBtn addBtn1;
+        private MinusBtn minusBtn1;
+        private MultipysBtn multipysBtn1;
+        private DividesBtn dividesBtn1;
     }
 }
 

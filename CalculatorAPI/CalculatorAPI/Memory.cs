@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CalculatorAPI.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,8 @@ namespace CalculatorAPI
 {
     public class Memory : IMemory
     {
+        private List<IElement> Elements;
+
         private string InputDigits;
 
         private StringBuilder InputDigitsBuilder;
@@ -16,12 +19,16 @@ namespace CalculatorAPI
 
         private StringBuilder CalculatedProcessBuilder;
 
+        private int ParentheseCount;
+
         public Memory()
         {
+            Elements = new List<IElement>();
             InputDigits = Consts.ZERO_STRING;
             InputDigitsBuilder = new StringBuilder(InputDigits);
             CalculatedProcess = Consts.EMYPT_STRING;
             CalculatedProcessBuilder = new StringBuilder();
+            ParentheseCount = Consts.ZERO;
         }
 
         public void AddDigit(string digit)
@@ -30,20 +37,16 @@ namespace CalculatorAPI
             InputDigits = InputDigitsBuilder.ToString();
         }
 
-        public void AddOperand()
+        public void AddElement(IElement element)
         {
-            CalculatedProcessBuilder.Append(InputDigits);
-            CalculatedProcess = CalculatedProcessBuilder.ToString();
-        }
-
-        public void AddOperator(string Operator)
-        {
-            CalculatedProcessBuilder.Append(Operator);
+            Elements.Add(element);
+            CalculatedProcessBuilder.Append(element.GetValueString());
             CalculatedProcess = CalculatedProcessBuilder.ToString();
         }
 
         public void ClearCalculatedProcess()
         {
+            Elements.Clear();
             CalculatedProcessBuilder.Clear();
             CalculatedProcess = CalculatedProcessBuilder.ToString();
         }
@@ -86,6 +89,19 @@ namespace CalculatorAPI
         {
             CalculatedProcessBuilder.Remove(CalculatedProcessBuilder.Length - 1, 1);
             CalculatedProcess = CalculatedProcessBuilder.ToString();
+        }
+        public int GetParentheseCounts()
+        {
+            return ParentheseCount;
+        }
+
+        public void SetParentheseCounts(int counts)
+        {
+            ParentheseCount = counts;
+        }
+        public List<IElement> GetInfix()
+        {
+            return Elements;
         }
     }
 }
