@@ -4,6 +4,9 @@
     <Compile Update="AbstractBtn.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Update="Btns\AddBtn.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Update="Btns\BackSpaceBtn.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -16,13 +19,28 @@
     <Compile Update="Btns\DigitBtn.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Update="Btns\DivideBtn.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Update="Btns\EqualBtn.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Btns\LeftParentheseBtn.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Btns\MinusBtn.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Btns\MultipyBtn.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Update="Btns\OperatorBtn.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Update="Btns\PointBtn.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Btns\RightParentheseBtn.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Update="Btns\SignChange.cs">

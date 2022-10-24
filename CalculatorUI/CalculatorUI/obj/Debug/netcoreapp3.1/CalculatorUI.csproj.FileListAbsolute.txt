@@ -1,0 +1,16 @@
+C:\Users\user1\Desktop\CalculatorUI\CalculatorUI\obj\Debug\netcoreapp3.1\CalculatorUI.csproj.AssemblyReference.cache
+C:\Users\user1\Desktop\CalculatorUI\CalculatorUI\obj\Debug\netcoreapp3.1\CalculatorUI.Form1.resources
+C:\Users\user1\Desktop\CalculatorUI\CalculatorUI\obj\Debug\netcoreapp3.1\CalculatorUI.csproj.GenerateResource.cache
+C:\Users\user1\Desktop\CalculatorUI\CalculatorUI\obj\Debug\netcoreapp3.1\CalculatorUI.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\user1\Desktop\CalculatorUI\CalculatorUI\obj\Debug\netcoreapp3.1\CalculatorUI.AssemblyInfoInputs.cache
+C:\Users\user1\Desktop\CalculatorUI\CalculatorUI\obj\Debug\netcoreapp3.1\CalculatorUI.AssemblyInfo.cs
+C:\Users\user1\Desktop\CalculatorUI\CalculatorUI\obj\Debug\netcoreapp3.1\CalculatorUI.csproj.CoreCompileInputs.cache
+C:\Users\user1\Desktop\CalculatorUI\CalculatorUI\bin\Debug\netcoreapp3.1\CalculatorUI.exe
+C:\Users\user1\Desktop\CalculatorUI\CalculatorUI\bin\Debug\netcoreapp3.1\CalculatorUI.deps.json
+C:\Users\user1\Desktop\CalculatorUI\CalculatorUI\bin\Debug\netcoreapp3.1\CalculatorUI.runtimeconfig.json
+C:\Users\user1\Desktop\CalculatorUI\CalculatorUI\bin\Debug\netcoreapp3.1\CalculatorUI.runtimeconfig.dev.json
+C:\Users\user1\Desktop\CalculatorUI\CalculatorUI\bin\Debug\netcoreapp3.1\CalculatorUI.dll
+C:\Users\user1\Desktop\CalculatorUI\CalculatorUI\bin\Debug\netcoreapp3.1\CalculatorUI.pdb
+C:\Users\user1\Desktop\CalculatorUI\CalculatorUI\obj\Debug\netcoreapp3.1\CalculatorUI.dll
+C:\Users\user1\Desktop\CalculatorUI\CalculatorUI\obj\Debug\netcoreapp3.1\CalculatorUI.pdb
+C:\Users\user1\Desktop\CalculatorUI\CalculatorUI\obj\Debug\netcoreapp3.1\CalculatorUI.genruntimeconfig.cache

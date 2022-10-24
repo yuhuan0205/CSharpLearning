@@ -1,32 +1,37 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\user\\Desktop\\programs\\C#\\CalculatorUI\\CalculatorUI\\CalculatorUI.csproj": {}
+    "C:\\Users\\user1\\Desktop\\CalculatorUI\\CalculatorUI\\CalculatorUI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\user\\Desktop\\programs\\C#\\CalculatorUI\\CalculatorUI\\CalculatorUI.csproj": {
+    "C:\\Users\\user1\\Desktop\\CalculatorUI\\CalculatorUI\\CalculatorUI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\user\\Desktop\\programs\\C#\\CalculatorUI\\CalculatorUI\\CalculatorUI.csproj",
+        "projectUniqueName": "C:\\Users\\user1\\Desktop\\CalculatorUI\\CalculatorUI\\CalculatorUI.csproj",
         "projectName": "CalculatorUI",
-        "projectPath": "C:\\Users\\user\\Desktop\\programs\\C#\\CalculatorUI\\CalculatorUI\\CalculatorUI.csproj",
-        "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\user\\Desktop\\programs\\C#\\CalculatorUI\\CalculatorUI\\obj\\",
+        "projectPath": "C:\\Users\\user1\\Desktop\\CalculatorUI\\CalculatorUI\\CalculatorUI.csproj",
+        "packagesPath": "C:\\Users\\user1\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\user1\\Desktop\\CalculatorUI\\CalculatorUI\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\user1\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net6.0-windows7.0"
+          "netcoreapp3.1"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net6.0-windows7.0": {
-            "targetAlias": "net6.0-windows",
+          "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
             "projectReferences": {}
           }
         },
@@ -37,8 +42,8 @@
         }
       },
       "frameworks": {
-        "net6.0-windows7.0": {
-          "targetAlias": "net6.0-windows",
+        "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
           "imports": [
             "net461",
             "net462",
@@ -57,7 +62,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.300\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.413\\RuntimeIdentifierGraph.json"
         }
       }
     }

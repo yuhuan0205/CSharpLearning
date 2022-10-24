@@ -110,5 +110,19 @@ namespace CalculatorAPI.Controllers
             ICalculator calculator = CalculatorPool.GetCalculatorById(id);
             calculator.GetResult();
         }
+
+        [HttpGet("leftparenthese/{id:int}")]
+        public void LeftParentheseBtnClick(int id)
+        {
+            ICalculator calculator = CalculatorPool.GetCalculatorById(id);
+            calculator.AddLeftParenthese();
+        }
+
+        [HttpGet("rightparenthese/{id:int}")]
+        public void RightParentheseBtnClick(int id)
+        {
+            ICalculator calculator = CalculatorPool.GetCalculatorById(id);
+            calculator.AddRightParenthese();
+        }
     }
 }

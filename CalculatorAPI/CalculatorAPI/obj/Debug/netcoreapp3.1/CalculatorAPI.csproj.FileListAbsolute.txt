@@ -1,0 +1,6 @@
+C:\Users\user1\Desktop\CalculatorAPI\CalculatorAPI\obj\Debug\netcoreapp3.1\CalculatorAPI.csproj.AssemblyReference.cache
+C:\Users\user1\Desktop\CalculatorAPI\CalculatorAPI\obj\Debug\netcoreapp3.1\CalculatorAPI.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\user1\Desktop\CalculatorAPI\CalculatorAPI\obj\Debug\netcoreapp3.1\CalculatorAPI.AssemblyInfoInputs.cache
+C:\Users\user1\Desktop\CalculatorAPI\CalculatorAPI\obj\Debug\netcoreapp3.1\CalculatorAPI.AssemblyInfo.cs
+C:\Users\user1\Desktop\CalculatorAPI\CalculatorAPI\obj\Debug\netcoreapp3.1\CalculatorAPI.csproj.CoreCompileInputs.cache
+C:\Users\user1\Desktop\CalculatorAPI\CalculatorAPI\obj\Debug\netcoreapp3.1\CalculatorAPI.MvcApplicationPartsAssemblyInfo.cache

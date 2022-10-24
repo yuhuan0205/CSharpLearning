@@ -1,4 +1,4 @@
-﻿using CalculatorAPI.Inertfaces;
+﻿using CalculatorAPI.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;

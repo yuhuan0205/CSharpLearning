@@ -1,5 +1,5 @@
 ﻿using CalculatorAPI.States;
-using CalculatorAPI.Inertfaces;
+using CalculatorAPI.Interfaces;
 using System.Text;
 using System.Threading.Tasks;
 using System.Text.Json;
@@ -80,6 +80,16 @@ namespace CalculatorAPI
             ICompute computeEnging = new ComputingTree();
             computeEnging.GetResult(Memory.GetCalculatedProcess());
             State = new EqualState(Memory);
+        }
+
+        public void AddLeftParenthese()
+        {
+            State = State.AddLeftParenthese();
+        }
+
+        public void AddRightParenthese()
+        {
+            State = State.AddRightParenthese();
         }
     }
 }
