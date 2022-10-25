@@ -91,7 +91,7 @@ namespace CalculatorAPI
 
         private string TreeTraversal(TreeNode root)
         {
-            return Convert.ToString(Solve(root));
+            return Solve(root).ToString("G29");
         }
 
         private decimal Solve(TreeNode node)

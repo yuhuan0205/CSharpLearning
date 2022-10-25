@@ -16,11 +16,18 @@ namespace CalculatorAPI.States
             Memory = memory;
         }
 
-        public IState AddCalculatedProcess(IElement element)
+        public virtual IState AddOperator(IElement element)
         {
             Memory.RemoveLastOperator();
             Memory.AddElement(element);
             return this;
+        }
+
+        public virtual IState AddOperatorDivide(IElement element)
+        {
+            Memory.RemoveLastOperator();
+            Memory.AddElement(element);
+            return new DivideState(Memory);
         }
 
         public IState AddDigit(string digit)
@@ -30,7 +37,7 @@ namespace CalculatorAPI.States
             return new NormalState(Memory);
         }
 
-        public IState AddDigitZero()
+        public virtual IState AddDigitZero()
         {
             Memory.ClearDigits();
             Memory.AddDigit(Consts.ZERO_STRING);
@@ -84,9 +91,7 @@ namespace CalculatorAPI.States
 
         public IState SquareRoot()
         {
-            double root = Math.Sqrt(Convert.ToDouble(Memory.GetDigits()));
-            Memory.SetDigits(root.ToString());
-            return new InitialState(Memory);
+            return this;
         }
     }
 }

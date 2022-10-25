@@ -19,14 +19,20 @@ namespace CalculatorAPI.States
             PointIndex = 0;
         }
 
-        public IState AddCalculatedProcess(IElement element)
+        public IState AddOperator(IElement element)
         {
             NumberElement number = new NumberElement(Memory.GetDigits());
             Memory.AddElement(number);
             Memory.AddElement(element);
             return new OperatingState(Memory);
         }
-
+        public IState AddOperatorDivide(IElement element)
+        {
+            NumberElement number = new NumberElement(Memory.GetDigits());
+            Memory.AddElement(number);
+            Memory.AddElement(element);
+            return new DivideState(Memory);
+        }
         public IState AddDigit(string digit)
         {
             Memory.AddDigit(digit);
@@ -57,6 +63,8 @@ namespace CalculatorAPI.States
         {
             for (; Memory.GetParentheseCounts() != 0;)
             {
+                NumberElement number = new NumberElement(Memory.GetDigits());
+                Memory.AddElement(number);
                 Memory.AddElement(element);
                 Memory.SetParentheseCounts(Memory.GetParentheseCounts() - Consts.ONE);
                 return new RightParentheseState(Memory);
@@ -95,6 +103,12 @@ namespace CalculatorAPI.States
         public IState SquareRoot()
         {
             double root = Math.Sqrt(Convert.ToDouble(Memory.GetDigits()));
+            for (; root is double.NaN;)
+            {
+                Memory.ClearCalculatedProcess();
+                Memory.SetDigits(Consts.SQUARE_ROOT_WITH_NAGATIVE);
+                return new ErrorState(Memory);
+            }
             Memory.SetDigits(root.ToString());
             return new InitialState(Memory);
         }

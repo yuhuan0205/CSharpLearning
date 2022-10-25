@@ -16,12 +16,20 @@ namespace CalculatorAPI.States
             Memory = memory;
         }
 
-        public IState AddCalculatedProcess(IElement element)
+        public virtual IState AddOperator(IElement element)
         {
             NumberElement number = new NumberElement(Memory.GetDigits());
             Memory.AddElement(number);
             Memory.AddElement(element);
             return new OperatingState(Memory);
+        }
+
+        public virtual IState AddOperatorDivide(IElement element)
+        {
+            NumberElement number = new NumberElement(Memory.GetDigits());
+            Memory.AddElement(number);
+            Memory.AddElement(element);
+            return new DivideState(Memory);
         }
 
         public IState AddDigit(string digit)
@@ -37,7 +45,7 @@ namespace CalculatorAPI.States
             return this;
         }
 
-        public IState AddLeftParenthese(IElement element)
+        public virtual IState AddLeftParenthese(IElement element)
         {
             Memory.ClearCalculatedProcess();
             Memory.AddElement(element);
@@ -47,6 +55,8 @@ namespace CalculatorAPI.States
 
         public IState AddPoint()
         {
+            Memory.ClearDigits();
+            Memory.AddDigit(Consts.ZERO_STRING);
             Memory.AddDigit(Consts.POINT);
             return new DecimalState(Memory);
         }
@@ -64,26 +74,32 @@ namespace CalculatorAPI.States
             return this;
         }
 
-        public IState Backspace()
+        public virtual IState Backspace()
         {
             return this;
         }
 
-        public IState ChangeSign()
+        public virtual IState ChangeSign()
         {
             Memory.SetDigits((Convert.ToDecimal(Memory.GetDigits()) * -1).ToString());
             return this;
         }
 
-        public void EqualClick()
+        public virtual void EqualClick()
         {
             NumberElement number = new NumberElement(Memory.GetDigits());
             Memory.AddElement(number);
         }
 
-        public IState SquareRoot()
+        public  virtual IState SquareRoot()
         {
             double root = Math.Sqrt(Convert.ToDouble(Memory.GetDigits()));
+            for (; root is double.NaN;)
+            {
+                Memory.ClearCalculatedProcess();
+                Memory.SetDigits(Consts.SQUARE_ROOT_WITH_NAGATIVE);
+                return new ErrorState(Memory);
+            }
             Memory.SetDigits(root.ToString());
             return this;
         }

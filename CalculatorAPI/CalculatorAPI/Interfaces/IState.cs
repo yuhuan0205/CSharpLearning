@@ -5,7 +5,8 @@ namespace CalculatorAPI.Interfaces
     {
         public IState AddDigit(string digit);
         public IState AddDigitZero();
-        public IState AddCalculatedProcess(IElement element);
+        public IState AddOperator(IElement element);
+        public IState AddOperatorDivide(IElement element);
         public IState Backspace();
         public IState ChangeSign();
         public IState SquareRoot();

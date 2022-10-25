@@ -65,6 +65,10 @@
         /// </summary>
         public const string RIGHT_PARENTHESE = ")";
 
+        public const string DIVIDE_BY_ZERO_ERROR = "無法除以零";
+
+        public const string SQUARE_ROOT_WITH_NAGATIVE = "無法對負數開根號";
+
         public const int PRIORITY_OPERAND = 4;
 
         public const int PRIORITY_RIGHT_PARENTHESE = 3;

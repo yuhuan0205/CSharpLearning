@@ -70,9 +70,18 @@ namespace CalculatorAPI
         /// call state to add element into memory.
         /// </summary>
         /// <param name="element">add an element which could be operator or operand into memory. </param>
-        public void AddCalculatedProcess(IElement element)
+        public void AddOperator(IElement element)
         {
-            State = State.AddCalculatedProcess(element);
+            State = State.AddOperator(element);
+        }
+
+        /// <summary>
+        /// add divide into calculator.
+        /// </summary>
+        /// <param name="element"> divider </param>
+        public void AddOperatorDivide(IElement element)
+        {
+            State = State.AddOperatorDivide(element);
         }
 
         /// <summary>

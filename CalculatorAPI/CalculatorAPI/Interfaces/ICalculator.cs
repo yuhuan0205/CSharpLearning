@@ -33,7 +33,13 @@ namespace CalculatorAPI
         /// add IElemnet into Calculator
         /// </summary>
         /// <param name="element"> operator or operand </param>
-        public void AddCalculatedProcess(IElement element);
+        public void AddOperator(IElement element);
+
+        /// <summary>
+        /// add IElemnet into Calculator
+        /// </summary>
+        /// <param name="element"> operator or operand </param>
+        public void AddOperatorDivide(IElement element);
 
         /// <summary>
         /// clear all status.

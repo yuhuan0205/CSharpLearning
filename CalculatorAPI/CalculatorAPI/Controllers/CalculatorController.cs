@@ -85,7 +85,7 @@ namespace CalculatorAPI.Controllers
         public void AddBtnClick(string id)
         {
             ICalculator calculator = CalculatorPool.GetCalculatorById(id);
-            calculator.AddCalculatedProcess(new Adder());
+            calculator.AddOperator(new Adder());
         }
 
         /// <summary>
@@ -96,7 +96,7 @@ namespace CalculatorAPI.Controllers
         public void MinusBtnClick(string id)
         {
             ICalculator calculator = CalculatorPool.GetCalculatorById(id);
-            calculator.AddCalculatedProcess(new Minuser());
+            calculator.AddOperator(new Minuser());
         }
 
         /// <summary>
@@ -107,7 +107,7 @@ namespace CalculatorAPI.Controllers
         public void MultipyBtnClick(string id)
         {
             ICalculator calculator = CalculatorPool.GetCalculatorById(id);
-            calculator.AddCalculatedProcess(new Multipyer());
+            calculator.AddOperator(new Multipyer());
         }
 
         /// <summary>
@@ -118,7 +118,7 @@ namespace CalculatorAPI.Controllers
         public void DivideBtnClick(string id)
         {
             ICalculator calculator = CalculatorPool.GetCalculatorById(id);
-            calculator.AddCalculatedProcess(new Divider());
+            calculator.AddOperatorDivide(new Divider());
         }
 
         /// <summary>
