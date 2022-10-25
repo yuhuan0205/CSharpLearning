@@ -7,8 +7,8 @@ namespace CalculatorAPI
 {
     public interface ICalculatorPool
     {
-        public int Enroll();
-        public ICalculator GetCalculatorById(int id);
-        public bool LogOut(int id);
+        public string Enroll();
+        public ICalculator GetCalculatorById(string id);
+        public bool LogOut(string id);
     }
 }

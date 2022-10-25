@@ -14,111 +14,116 @@ namespace CalculatorAPI.Controllers
         /// <summary>
         /// create a singleton CalculatorPool
         /// </summary>
-        /// <param name="_CalculatorPool"></param>
-        public CalculatorController(ICalculatorPool _CalculatorPool)
+        /// <param name="calculatorPool"></param>
+        public CalculatorController(ICalculatorPool calculatorPool)
         {
-            CalculatorPool = _CalculatorPool;
+            CalculatorPool = calculatorPool;
         }
 
         [HttpGet("enroll")]
-        public int Enroll()
+        public string Enroll()
         {
-            return CalculatorPool.Enroll();
+            string guid;
+            lock (CalculatorPool)
+            {
+                guid = CalculatorPool.Enroll();
+            }
+            return guid;
         }
 
-        [HttpDelete("calculator/{id:int}")]
-        public void LogOut(int id)
+        [HttpDelete("calculator/{id}")]
+        public void LogOut(string id)
         {
             CalculatorPool.LogOut(id);
         }
 
-        [HttpGet("status/{id:int}")]
-        public string GetStatus(int id)
+        [HttpGet("status/{id}")]
+        public string GetStatus(string id)
         {
             ICalculator calculator = CalculatorPool.GetCalculatorById(id);
             return calculator.GetStatus();
         }
 
-        [HttpGet("input/{id:int}/{digit}")]
-        public void DigitBtnClick(int id, string digit)
+        [HttpGet("input/{id}/{digit}")]
+        public void DigitBtnClick(string id, string digit)
         {
             ICalculator calculator = CalculatorPool.GetCalculatorById(id);
             calculator.AddDigit(digit);
         }
 
-        [HttpGet("inputzero/{id:int}")]
-        public void ZeroBtnClick(int id)
+        [HttpGet("inputzero/{id}")]
+        public void ZeroBtnClick(string id)
         {
             ICalculator calculator = CalculatorPool.GetCalculatorById(id);
             calculator.AddDigitZero();
         }
 
-        [HttpGet("add/{id:int}")]
-        public void AddBtnClick(int id)
+        [HttpGet("add/{id}")]
+        public void AddBtnClick(string id)
         {
             ICalculator calculator = CalculatorPool.GetCalculatorById(id);
             calculator.AddCalculatedProcess(new Adder());
         }
 
-        [HttpGet("minus/{id:int}")]
-        public void MinusBtnClick(int id)
+        [HttpGet("minus/{id}")]
+        public void MinusBtnClick(string id)
         {
             ICalculator calculator = CalculatorPool.GetCalculatorById(id);
             calculator.AddCalculatedProcess(new Minuser());
         }
 
-        [HttpGet("multipy/{id:int}")]
-        public void MultipyBtnClick(int id)
+        [HttpGet("multipy/{id}")]
+        public void MultipyBtnClick(string id)
         {
             ICalculator calculator = CalculatorPool.GetCalculatorById(id);
             calculator.AddCalculatedProcess(new Multipyer());
         }
 
-        [HttpGet("divide/{id:int}")]
-        public void DivideBtnClick(int id)
+        [HttpGet("divide/{id}")]
+        public void DivideBtnClick(string id)
         {
             ICalculator calculator = CalculatorPool.GetCalculatorById(id);
             calculator.AddCalculatedProcess(new Divider());
         }
 
-        [HttpGet("backspace/{id:int}")]
-        public void BackspaceBtnClick(int id)
+        [HttpGet("backspace/{id}")]
+        public void BackspaceBtnClick(string id)
         {
             ICalculator calculator = CalculatorPool.GetCalculatorById(id);
             calculator.Backspace();
         }
 
-        [HttpGet("changesign/{id:int}")]
-        public void ChangeSignBtnClick(int id)
+        [HttpGet("changesign/{id}")]
+        public void ChangeSignBtnClick(string id)
         {
             ICalculator calculator = CalculatorPool.GetCalculatorById(id);
             calculator.ChangeSign();
         }
 
-        [HttpGet("squareroot/{id:int}")]
-        public void SquareRootBtnClick(int id)
+        [HttpGet("squareroot/{id}")]
+        public void SquareRootBtnClick(string id)
         {
             ICalculator calculator = CalculatorPool.GetCalculatorById(id);
             calculator.SquareRoot();
         }
 
-        [HttpGet("point/{id:int}")]
-        public void PointBtnClick(int id)
+        [HttpGet("point/{id}")]
+        public void PointBtnClick(string id)
         {
             ICalculator calculator = CalculatorPool.GetCalculatorById(id);
             calculator.AddPoint();
         }
 
-        [HttpGet("ce/{id:int}")]
-        public void CEBtnClick(int id)
+        [HttpGet("ce/{id}")]
+        public void CEBtnClick(string id)
         {
             ICalculator calculator = CalculatorPool.GetCalculatorById(id);
             calculator.ResetDigits();
         }
 
 
-        [HttpGet("c/{id:int}")]
-        public void CBtnClick(int id)
+        [HttpGet("c/{id}")]
+        public void CBtnClick(string id)
         {
             ICalculator calculator = CalculatorPool.GetCalculatorById(id);
             calculator.ResetDigits();
@@ -126,22 +131,22 @@ namespace CalculatorAPI.Controllers
         }
 
 
-        [HttpGet("getresult/{id:int}")]
-        public void EqualBtnClick(int id)
+        [HttpGet("getresult/{id}")]
+        public void EqualBtnClick(string id)
         {
             ICalculator calculator = CalculatorPool.GetCalculatorById(id);
             calculator.GetResult();
         }
 
-        [HttpGet("leftparenthese/{id:int}")]
-        public void LeftParentheseBtnClick(int id)
+        [HttpGet("leftparenthese/{id}")]
+        public void LeftParentheseBtnClick(string id)
         {
             ICalculator calculator = CalculatorPool.GetCalculatorById(id);
             calculator.AddLeftParenthese(new LeftParenthese());
         }
 
-        [HttpGet("rightparenthese/{id:int}")]
-        public void RightParentheseBtnClick(int id)
+        [HttpGet("rightparenthese/{id}")]
+        public void RightParentheseBtnClick(string id)
         {
             ICalculator calculator = CalculatorPool.GetCalculatorById(id);
             calculator.AddRightParenthese(new RightParenthese());
