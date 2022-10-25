@@ -58,7 +58,7 @@
             // numbersBtn1
             // 
             this.numbersBtn1.Font = new System.Drawing.Font("Microsoft JhengHei UI", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.numbersBtn1.Location = new System.Drawing.Point(8, 421);
+            this.numbersBtn1.Location = new System.Drawing.Point(12, 476);
             this.numbersBtn1.Name = "numbersBtn1";
             this.numbersBtn1.Size = new System.Drawing.Size(82, 37);
             this.numbersBtn1.TabIndex = 0;
@@ -69,7 +69,7 @@
             // numbersBtn2
             // 
             this.numbersBtn2.Font = new System.Drawing.Font("Microsoft JhengHei UI", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.numbersBtn2.Location = new System.Drawing.Point(111, 421);
+            this.numbersBtn2.Location = new System.Drawing.Point(115, 476);
             this.numbersBtn2.Name = "numbersBtn2";
             this.numbersBtn2.Size = new System.Drawing.Size(82, 37);
             this.numbersBtn2.TabIndex = 1;
@@ -80,7 +80,7 @@
             // numbersBtn3
             // 
             this.numbersBtn3.Font = new System.Drawing.Font("Microsoft JhengHei UI", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.numbersBtn3.Location = new System.Drawing.Point(212, 421);
+            this.numbersBtn3.Location = new System.Drawing.Point(216, 476);
             this.numbersBtn3.Name = "numbersBtn3";
             this.numbersBtn3.Size = new System.Drawing.Size(82, 37);
             this.numbersBtn3.TabIndex = 2;
@@ -91,7 +91,7 @@
             // numbersBtn4
             // 
             this.numbersBtn4.Font = new System.Drawing.Font("Microsoft JhengHei UI", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.numbersBtn4.Location = new System.Drawing.Point(8, 367);
+            this.numbersBtn4.Location = new System.Drawing.Point(12, 422);
             this.numbersBtn4.Name = "numbersBtn4";
             this.numbersBtn4.Size = new System.Drawing.Size(82, 37);
             this.numbersBtn4.TabIndex = 3;
@@ -102,7 +102,7 @@
             // numbersBtn5
             // 
             this.numbersBtn5.Font = new System.Drawing.Font("Microsoft JhengHei UI", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.numbersBtn5.Location = new System.Drawing.Point(111, 367);
+            this.numbersBtn5.Location = new System.Drawing.Point(115, 422);
             this.numbersBtn5.Name = "numbersBtn5";
             this.numbersBtn5.Size = new System.Drawing.Size(82, 37);
             this.numbersBtn5.TabIndex = 4;
@@ -113,7 +113,7 @@
             // numbersBtn6
             // 
             this.numbersBtn6.Font = new System.Drawing.Font("Microsoft JhengHei UI", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.numbersBtn6.Location = new System.Drawing.Point(212, 367);
+            this.numbersBtn6.Location = new System.Drawing.Point(216, 422);
             this.numbersBtn6.Name = "numbersBtn6";
             this.numbersBtn6.Size = new System.Drawing.Size(82, 37);
             this.numbersBtn6.TabIndex = 5;
@@ -124,7 +124,7 @@
             // numbersBtn7
             // 
             this.numbersBtn7.Font = new System.Drawing.Font("Microsoft JhengHei UI", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.numbersBtn7.Location = new System.Drawing.Point(8, 312);
+            this.numbersBtn7.Location = new System.Drawing.Point(12, 367);
             this.numbersBtn7.Name = "numbersBtn7";
             this.numbersBtn7.Size = new System.Drawing.Size(82, 37);
             this.numbersBtn7.TabIndex = 6;
@@ -135,7 +135,7 @@
             // numbersBtn8
             // 
             this.numbersBtn8.Font = new System.Drawing.Font("Microsoft JhengHei UI", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.numbersBtn8.Location = new System.Drawing.Point(111, 312);
+            this.numbersBtn8.Location = new System.Drawing.Point(115, 367);
             this.numbersBtn8.Name = "numbersBtn8";
             this.numbersBtn8.Size = new System.Drawing.Size(82, 37);
             this.numbersBtn8.TabIndex = 7;
@@ -146,7 +146,7 @@
             // numbersBtn9
             // 
             this.numbersBtn9.Font = new System.Drawing.Font("Microsoft JhengHei UI", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.numbersBtn9.Location = new System.Drawing.Point(212, 312);
+            this.numbersBtn9.Location = new System.Drawing.Point(216, 367);
             this.numbersBtn9.Name = "numbersBtn9";
             this.numbersBtn9.Size = new System.Drawing.Size(82, 37);
             this.numbersBtn9.TabIndex = 8;
@@ -157,7 +157,7 @@
             // numbersBtn10
             // 
             this.numbersBtn10.Font = new System.Drawing.Font("Microsoft JhengHei UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.numbersBtn10.Location = new System.Drawing.Point(111, 475);
+            this.numbersBtn10.Location = new System.Drawing.Point(115, 530);
             this.numbersBtn10.Name = "numbersBtn10";
             this.numbersBtn10.Size = new System.Drawing.Size(82, 37);
             this.numbersBtn10.TabIndex = 9;
@@ -168,7 +168,7 @@
             // equalBtn1
             // 
             this.equalBtn1.Font = new System.Drawing.Font("Microsoft JhengHei UI", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.equalBtn1.Location = new System.Drawing.Point(309, 475);
+            this.equalBtn1.Location = new System.Drawing.Point(313, 530);
             this.equalBtn1.Name = "equalBtn1";
             this.equalBtn1.Size = new System.Drawing.Size(82, 37);
             this.equalBtn1.TabIndex = 12;
@@ -179,7 +179,7 @@
             // ceBtn1
             // 
             this.ceBtn1.Font = new System.Drawing.Font("Microsoft JhengHei UI", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.ceBtn1.Location = new System.Drawing.Point(8, 255);
+            this.ceBtn1.Location = new System.Drawing.Point(12, 310);
             this.ceBtn1.Name = "ceBtn1";
             this.ceBtn1.Size = new System.Drawing.Size(82, 42);
             this.ceBtn1.TabIndex = 18;
@@ -190,7 +190,7 @@
             // cBtn1
             // 
             this.cBtn1.Font = new System.Drawing.Font("Microsoft JhengHei UI", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.cBtn1.Location = new System.Drawing.Point(111, 255);
+            this.cBtn1.Location = new System.Drawing.Point(115, 310);
             this.cBtn1.Name = "cBtn1";
             this.cBtn1.Size = new System.Drawing.Size(82, 42);
             this.cBtn1.TabIndex = 19;
@@ -201,7 +201,7 @@
             // backSpaceBtn1
             // 
             this.backSpaceBtn1.Font = new System.Drawing.Font("Microsoft JhengHei UI", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.backSpaceBtn1.Location = new System.Drawing.Point(212, 255);
+            this.backSpaceBtn1.Location = new System.Drawing.Point(216, 310);
             this.backSpaceBtn1.Name = "backSpaceBtn1";
             this.backSpaceBtn1.Size = new System.Drawing.Size(82, 42);
             this.backSpaceBtn1.TabIndex = 20;
@@ -212,7 +212,7 @@
             // negativeBtn1
             // 
             this.negativeBtn1.Font = new System.Drawing.Font("Microsoft JhengHei UI", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.negativeBtn1.Location = new System.Drawing.Point(9, 475);
+            this.negativeBtn1.Location = new System.Drawing.Point(13, 530);
             this.negativeBtn1.Name = "negativeBtn1";
             this.negativeBtn1.Size = new System.Drawing.Size(81, 35);
             this.negativeBtn1.TabIndex = 21;
@@ -223,7 +223,7 @@
             // pointBtn1
             // 
             this.pointBtn1.Font = new System.Drawing.Font("Microsoft JhengHei UI", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.pointBtn1.Location = new System.Drawing.Point(212, 475);
+            this.pointBtn1.Location = new System.Drawing.Point(216, 530);
             this.pointBtn1.Name = "pointBtn1";
             this.pointBtn1.Size = new System.Drawing.Size(82, 37);
             this.pointBtn1.TabIndex = 22;
@@ -234,7 +234,7 @@
             // InputNumber
             // 
             this.InputNumber.Font = new System.Drawing.Font("Microsoft JhengHei UI", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.InputNumber.Location = new System.Drawing.Point(13, 99);
+            this.InputNumber.Location = new System.Drawing.Point(13, 163);
             this.InputNumber.Name = "InputNumber";
             this.InputNumber.ReadOnly = true;
             this.InputNumber.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -249,14 +249,14 @@
             this.CaculatedProcess.Name = "CaculatedProcess";
             this.CaculatedProcess.ReadOnly = true;
             this.CaculatedProcess.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.CaculatedProcess.Size = new System.Drawing.Size(382, 80);
+            this.CaculatedProcess.Size = new System.Drawing.Size(382, 134);
             this.CaculatedProcess.TabIndex = 25;
             this.CaculatedProcess.Text = "";
             // 
             // squareRootBtn1
             // 
             this.squareRootBtn1.Font = new System.Drawing.Font("Microsoft JhengHei UI", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.squareRootBtn1.Location = new System.Drawing.Point(8, 194);
+            this.squareRootBtn1.Location = new System.Drawing.Point(12, 249);
             this.squareRootBtn1.Name = "squareRootBtn1";
             this.squareRootBtn1.Size = new System.Drawing.Size(82, 42);
             this.squareRootBtn1.TabIndex = 26;
@@ -267,7 +267,7 @@
             // leftParentheseBtn1
             // 
             this.leftParentheseBtn1.Font = new System.Drawing.Font("Microsoft JhengHei UI", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.leftParentheseBtn1.Location = new System.Drawing.Point(111, 194);
+            this.leftParentheseBtn1.Location = new System.Drawing.Point(115, 249);
             this.leftParentheseBtn1.Name = "leftParentheseBtn1";
             this.leftParentheseBtn1.Size = new System.Drawing.Size(82, 42);
             this.leftParentheseBtn1.TabIndex = 27;
@@ -278,7 +278,7 @@
             // rightParentheseBtn1
             // 
             this.rightParentheseBtn1.Font = new System.Drawing.Font("Microsoft JhengHei UI", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.rightParentheseBtn1.Location = new System.Drawing.Point(212, 194);
+            this.rightParentheseBtn1.Location = new System.Drawing.Point(216, 249);
             this.rightParentheseBtn1.Name = "rightParentheseBtn1";
             this.rightParentheseBtn1.Size = new System.Drawing.Size(82, 42);
             this.rightParentheseBtn1.TabIndex = 28;
@@ -289,7 +289,7 @@
             // addBtn1
             // 
             this.addBtn1.Font = new System.Drawing.Font("Microsoft JhengHei UI", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.addBtn1.Location = new System.Drawing.Point(309, 421);
+            this.addBtn1.Location = new System.Drawing.Point(313, 476);
             this.addBtn1.Name = "addBtn1";
             this.addBtn1.Size = new System.Drawing.Size(82, 37);
             this.addBtn1.TabIndex = 29;
@@ -300,7 +300,7 @@
             // minusBtn1
             // 
             this.minusBtn1.Font = new System.Drawing.Font("Microsoft JhengHei UI", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.minusBtn1.Location = new System.Drawing.Point(309, 367);
+            this.minusBtn1.Location = new System.Drawing.Point(313, 422);
             this.minusBtn1.Name = "minusBtn1";
             this.minusBtn1.Size = new System.Drawing.Size(82, 37);
             this.minusBtn1.TabIndex = 30;
@@ -311,7 +311,7 @@
             // multipysBtn1
             // 
             this.multipysBtn1.Font = new System.Drawing.Font("Microsoft JhengHei UI", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.multipysBtn1.Location = new System.Drawing.Point(309, 312);
+            this.multipysBtn1.Location = new System.Drawing.Point(313, 367);
             this.multipysBtn1.Name = "multipysBtn1";
             this.multipysBtn1.Size = new System.Drawing.Size(82, 37);
             this.multipysBtn1.TabIndex = 31;
@@ -322,7 +322,7 @@
             // dividesBtn1
             // 
             this.dividesBtn1.Font = new System.Drawing.Font("Microsoft JhengHei UI", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.dividesBtn1.Location = new System.Drawing.Point(309, 255);
+            this.dividesBtn1.Location = new System.Drawing.Point(313, 310);
             this.dividesBtn1.Name = "dividesBtn1";
             this.dividesBtn1.Size = new System.Drawing.Size(82, 42);
             this.dividesBtn1.TabIndex = 32;
@@ -334,7 +334,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(406, 524);
+            this.ClientSize = new System.Drawing.Size(406, 580);
             this.Controls.Add(this.dividesBtn1);
             this.Controls.Add(this.multipysBtn1);
             this.Controls.Add(this.minusBtn1);

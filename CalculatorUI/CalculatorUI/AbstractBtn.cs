@@ -16,6 +16,6 @@ namespace CalculatorUI
         /// it makes each button has its own OnClick function.
         /// </summary>
         /// <param name="calculator">a calculator implemented ICalculator</param>
-        public abstract Task OnClick(int id, HttpClient client);
+        public abstract Task OnClick(string id, HttpClient client);
     }
 }

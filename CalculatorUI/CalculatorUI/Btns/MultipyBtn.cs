@@ -13,7 +13,7 @@ namespace CalculatorUI
         /// </summary>
         /// <param name="id"> id of this application</param>
         /// <param name="client"> a object to call api </param>
-        public async override Task OnClick(int id, HttpClient client)
+        public async override Task OnClick(string id, HttpClient client)
         {
             _ = await client.GetAsync($"multipy/{id}");
         }

@@ -17,7 +17,7 @@ namespace CalculatorUI
         /// <summary>
         /// a object implemented ICalculator. In order to compute.
         /// </summary>
-        public int Id { get; set; }
+        public string Id { get; set; }
 
 
         /// <summary>
@@ -35,7 +35,7 @@ namespace CalculatorUI
         private async void InitMembers()
         {
             Client = new HttpClient { BaseAddress = new Uri("https://localhost:5001/") };
-            Id = Convert.ToInt16(await GetId());
+            Id = await GetId();
         }
 
         public async Task<string> GetId()
