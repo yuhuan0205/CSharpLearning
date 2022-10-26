@@ -144,7 +144,7 @@ namespace CalculatorAPI.Controllers
         }
 
         /// <summary>
-        /// do a square root with specific calculator's operand.  
+        /// get a square root of operand from specific calculator.  
         /// </summary>
         /// <param name="id"> user's id </param>
         [HttpGet("squareroot/{id}")]

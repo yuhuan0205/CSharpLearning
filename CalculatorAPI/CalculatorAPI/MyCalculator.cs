@@ -112,7 +112,7 @@ namespace CalculatorAPI
         }
 
         /// <summary>
-        /// call State do a square root with operand.
+        /// call State to get a square root of operand.
         /// </summary>
         public void SquareRoot()
         {

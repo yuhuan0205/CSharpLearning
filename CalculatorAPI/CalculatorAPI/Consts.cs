@@ -65,21 +65,29 @@
         /// </summary>
         public const string RIGHT_PARENTHESE = ")";
 
+        /// <summary>
+        /// a error message.
+        /// </summary>
         public const string DIVIDE_BY_ZERO_ERROR = "無法除以零";
 
+        /// <summary>
+        /// a error message.
+        /// </summary>
         public const string SQUARE_ROOT_WITH_NAGATIVE = "無法對負數開根號";
 
-        public const int PRIORITY_OPERAND = 4;
+        /// <summary>
+        /// priority of the elements which are not a operator.
+        /// </summary>
+        public const int PRIORITY_NONE = 0;
 
-        public const int PRIORITY_RIGHT_PARENTHESE = 3;
-
+        /// <summary>
+        /// priority divider and multipyer.
+        /// </summary>
         public const int PRIORITY_OPERTOR_HIGH = 2;
 
+        /// <summary>
+        /// priority adder and minuser.
+        /// </summary>
         public const int PRIORITY_OPERTOR_LOW = 1;
-
-        public const int PRIORITY_LEFT_PARENTHESE = 0;
-
-        public const int PRIORITY_END = -1;
-
     }
 }

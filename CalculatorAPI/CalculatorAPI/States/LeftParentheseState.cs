@@ -86,8 +86,6 @@ namespace CalculatorAPI.States
 
         public IState SquareRoot()
         {
-            //double root = Math.Sqrt(Convert.ToDouble(Memory.GetDigits()));
-            //Memory.SetDigits(root.ToString());
             return this;
         }
     }

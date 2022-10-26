@@ -57,7 +57,7 @@ namespace CalculatorAPI
         public void ChangeSign();
 
         /// <summary>
-        /// do a square root with operand.
+        /// get a square root of operand.  
         /// </summary>
         public void SquareRoot();
 
