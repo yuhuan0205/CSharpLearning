@@ -27,6 +27,7 @@ namespace CalculatorAPI.Elements
         /// <summary>
         /// Constructor.
         /// </summary>
+        /// <param name="value"> operand </param>
         public NumberElement(string value)
         {
             ValueString = value;
@@ -59,7 +60,7 @@ namespace CalculatorAPI.Elements
         /// <param name="firstNumber"> the first number </param>
         /// <param name="secondNumber"> the second number </param>
         /// <returns> operand </returns>
-        public decimal DoOperation(decimal firstNumber, decimal LastNumber)
+        public decimal DoOperation(decimal firstNumber, decimal secondNumber)
         {
             return Value;
         }

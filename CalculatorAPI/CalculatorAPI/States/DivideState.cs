@@ -1,23 +1,36 @@
 ﻿using CalculatorAPI.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace CalculatorAPI.States
 {
-    public class DivideState: OperatingState
+    /// <summary>
+    /// DivideState is a state inherit OperatingState.
+    /// </summary>
+    public class DivideState : OperatingState
     {
+        /// <summary>
+        /// a object store data.
+        /// </summary>
         private IMemory Memory;
 
+        /// <summary>
+        /// a int store how many times the zeroBtn is clicked.
+        /// </summary>
         private int ZeroCount;
 
-        public DivideState(IMemory memory):base(memory)
+        /// <summary>
+        /// Constructor.
+        /// </summary>
+        /// <param name="memory"> DI memory </param>
+        public DivideState(IMemory memory) : base(memory)
         {
             Memory = memory;
             ZeroCount = Consts.ZERO;
         }
 
+        /// <summary>
+        /// add zero into digits, record the times zeroBtn clicked.
+        /// </summary>
+        /// <returns> this state. </returns>
         public override IState AddDigitZero()
         {
             Memory.ClearDigits();
@@ -26,9 +39,14 @@ namespace CalculatorAPI.States
             return this;
         }
 
+        /// <summary>
+        /// in DivideState, if user add other operators after typed zero, then change state to ErrorState.
+        /// </summary>
+        /// <param name="element"> operators except divide. </param>
+        /// <returns> ErrorState </returns>
         public override IState AddOperator(IElement element)
         {
-            for(;ZeroCount == Consts.ZERO ;)
+            for (; ZeroCount == Consts.ZERO; )
             {
                 Memory.RemoveLastOperator();
                 Memory.AddElement(element);
@@ -39,6 +57,11 @@ namespace CalculatorAPI.States
             return new ErrorState(Memory);
         }
 
+        /// <summary>
+        /// add divide into expression.
+        /// </summary>
+        /// <param name="element"> divide. </param>
+        /// <returns> this state </returns>
         public override IState AddOperatorDivide(IElement element)
         {
             return this;

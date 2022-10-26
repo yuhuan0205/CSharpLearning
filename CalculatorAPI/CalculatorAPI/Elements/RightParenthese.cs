@@ -11,12 +11,12 @@ namespace CalculatorAPI.Elements
         /// <summary>
         /// a string represent ")"
         /// </summary>
-        public string ValueString;
+        private string ValueString;
 
         /// <summary>
         /// a RightParenthese's priority.
         /// </summary>
-        public int Priority;
+        private int Priority;
 
         /// <summary>
         /// Constructor.

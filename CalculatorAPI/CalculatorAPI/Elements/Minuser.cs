@@ -76,7 +76,7 @@ namespace CalculatorAPI.Elements
         /// <returns> zero </returns>
         public decimal GetValue()
         {
-            return Consts.ZERO; ;
+            return Consts.ZERO;
         }
 
         /// <summary>

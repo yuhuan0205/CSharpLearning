@@ -73,6 +73,7 @@ namespace CalculatorAPI
         /// <summary>
         /// set counts of unpaired parenthese value.
         /// </summary>
+        /// <param name="counts">value</param>
         public void SetParentheseCounts(int counts);
 
         /// <summary>

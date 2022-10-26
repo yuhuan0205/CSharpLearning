@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using System.Net.Http;
+﻿using System.Net.Http;
 
 namespace CalculatorUI
 {
@@ -15,7 +14,9 @@ namespace CalculatorUI
         /// every child class should implement this abstract function.
         /// it makes each button has its own OnClick function.
         /// </summary>
-        /// <param name="calculator">a calculator implemented ICalculator</param>
+        /// <param name="id"> id of this application</param>
+        /// <param name="client"> a object to call api </param>
+        /// <returns> task </returns>
         public abstract Task OnClick(string id, HttpClient client);
     }
 }

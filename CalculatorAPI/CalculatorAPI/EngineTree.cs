@@ -51,11 +51,11 @@ namespace CalculatorAPI
             List<IElement> postfix = new List<IElement>();
             Stack<IElement> stack = new Stack<IElement>();
 
-            foreach(IElement element in infix)
+            foreach (IElement element in infix)
             {
                 element.AddIntoPostfix(stack, postfix);
             }
-            while(stack.Count != 0)
+            while (stack.Count != 0)
             {
                 postfix.Add(stack.Pop());
             }
@@ -65,12 +65,12 @@ namespace CalculatorAPI
         /// <summary>
         /// build a expression tree from postfix expression.
         /// </summary>
-        /// <param name="postfix"></param>
+        /// <param name="postfix"> a postfix list of Elements </param>
         /// <returns> the root of the tree. </returns>
         private TreeNode PostfixToExpressionTree(List<IElement> postfix)
         {
             Stack<TreeNode> nodes = new Stack<TreeNode>();
-            foreach(IElement element in postfix)
+            foreach (IElement element in postfix)
             {
                 element.AddIntoTree(nodes);
             }
@@ -99,7 +99,7 @@ namespace CalculatorAPI
             Prefix.Add(node.Value);
 
             //ending condition.
-            if(node.LeftNode == null || node.RightNode == null)
+            if (node.LeftNode == null || node.RightNode == null)
             {
                 return node.Value.GetValue();
             }
@@ -126,7 +126,7 @@ namespace CalculatorAPI
             string Answer = TraverseTreeGetAnswer(Root);
 
             StringBuilder processBuilder = new StringBuilder();
-            foreach(IElement element in Infix)
+            foreach (IElement element in Infix)
             {
                 processBuilder.Append(element.GetValueString());
             }

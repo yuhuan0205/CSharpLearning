@@ -65,7 +65,7 @@ namespace CalculatorAPI
         /// <summary>
         /// add a operand or operator into Elements. 
         /// </summary>
-        /// <param name="element"></param>
+        /// <param name="element"> IElement </param>
         public void AddElement(IElement element)
         {
             Elements.Add(element);
@@ -161,7 +161,7 @@ namespace CalculatorAPI
         /// <summary>
         /// set ParentheseCount's value.
         /// </summary>
-        /// <param name="counts"></param>
+        /// <param name="counts">value</param>
         public void SetParentheseCounts(int counts)
         {
             ParentheseCount = counts;

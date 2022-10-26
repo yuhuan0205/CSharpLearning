@@ -35,8 +35,7 @@ namespace CalculatorAPI
         /// <returns> return a json formated string. </returns>
         public string GetStatus()
         {
-            return JsonSerializer.Serialize( new MessageObject { InputNumber = Memory.GetDigits(), 
-                                                                CalculatedProcess = Memory.GetCalculatedProcess() });
+            return JsonSerializer.Serialize( new MessageObject { InputNumber = Memory.GetDigits(), CalculatedProcess = Memory.GetCalculatedProcess() });
         }
 
         /// <summary>
@@ -92,7 +91,7 @@ namespace CalculatorAPI
             Memory.ClearCalculatedProcess();
             Memory.ClearDigits();
             Memory.AddDigit(Consts.ZERO_STRING);
-            State =  new InitialState(Memory);
+            State = new InitialState(Memory);
         }
 
         /// <summary>
@@ -143,7 +142,7 @@ namespace CalculatorAPI
             // new a engine to compute
             IEngine computeEnging = new EngineTree(Memory.GetInfix());
 
-            MessageObject message =  computeEnging.GetResult();
+            MessageObject message = computeEnging.GetResult();
             Memory.SetDigits(message.InputNumber);
             Memory.SetCalculatedProcess(message.CalculatedProcess);
             Memory.SetParentheseCounts(0);

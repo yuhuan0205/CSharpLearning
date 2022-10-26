@@ -12,13 +12,15 @@ namespace CalculatorUI
     /// </summary>
     public partial class Form1 : Form
     {
-        public HttpClient Client { get; set; }
+        /// <summary>
+        /// a client object in order to call api.
+        /// </summary>
+        private HttpClient Client;
 
         /// <summary>
         /// a object implemented ICalculator. In order to compute.
         /// </summary>
-        public string Id { get; set; }
-
+        private string Id;
 
         /// <summary>
         /// Form init, Calculator init.
@@ -38,7 +40,11 @@ namespace CalculatorUI
             Id = await GetId();
         }
 
-        public async Task<string> GetId()
+        /// <summary>
+        /// call api to get id.
+        /// </summary>
+        /// <returns>id</returns>
+        private async Task<string> GetId()
         {
             HttpResponseMessage response = await Client.GetAsync("enroll");
             string idString = await response.Content.ReadAsStringAsync();
@@ -66,6 +72,11 @@ namespace CalculatorUI
             CaculatedProcess.Text = message.CalculatedProcess;
         }
 
+        /// <summary>
+        /// log out from server.
+        /// </summary>
+        /// <param name="sender"> the parameter is not used </param>
+        /// <param name="e"> object </param>
         private async void Form1_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             await Client.DeleteAsync($"calculator/{Id}");

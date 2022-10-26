@@ -16,7 +16,7 @@ namespace CalculatorAPI.Controllers
         /// <summary>
         /// create a singleton CalculatorPool with DI.
         /// </summary>
-        /// <param name="calculatorPool"></param>
+        /// <param name="calculatorPool">DI from service</param>
         public CalculatorController(ICalculatorPool calculatorPool)
         {
             CalculatorPool = calculatorPool;

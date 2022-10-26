@@ -23,6 +23,6 @@
         /// </summary>
         /// <param name="id"> user's id </param>
         /// <returns> has the task done? </returns>
-        public bool LogOut(string id);
+        public void LogOut(string id);
     }
 }

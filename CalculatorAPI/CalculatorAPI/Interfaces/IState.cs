@@ -63,7 +63,6 @@
         /// <returns> next state. </returns>
         public IState AddLeftParenthese(IElement element);
 
-
         /// <summary>
         /// add right parenthese into Elements.
         /// </summary>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 
 namespace CalculatorAPI
 {
@@ -28,7 +29,7 @@ namespace CalculatorAPI
         public string Enroll()
         {
             string id = Guid.NewGuid().ToString();
-            while( !Pool.TryAdd(id, new MyCalculator()))
+            while (!Pool.TryAdd(id, new MyCalculator()))
             {
                 id = Guid.NewGuid().ToString();
             }
@@ -51,10 +52,10 @@ namespace CalculatorAPI
         /// </summary>
         /// <param name="id"> input id </param>
         /// <returns> a bool repressent this operation has done.</returns>
-        public bool LogOut(string id)
+        public void LogOut(string id)
         {
-            Pool[id] = null;
-            return true;
+            ICalculator calculator = null;
+            Pool.TryRemove(id, out calculator);
         }
     }
 }
