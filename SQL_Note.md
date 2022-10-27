@@ -1,5 +1,14 @@
 # SQL 練習題目及答案
 
+primary 只能有一個，可以由多個key組成，必須為唯一不可重複的key。
+
+foreign key 則是其他 table 的 primary key。
+
+資料完整性：
+* 實體完整性：Database會拒絕加入重複的primary key來保證實體完整性。
+* 區域完整性：Database會拒絕加入資料類型超出預設範圍的資料，來確保區域完整性。
+* 參考完整性：若 TableA 的 foreign key 指向的 TableB 的 primary key 將被刪除，Database會拒絕操作以確保參考完整性。
+
 ### 第一題
 請在192.168.10.180的StockDB底下建立一張資料表，資料表需求如下：
 ```
