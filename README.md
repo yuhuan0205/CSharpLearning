@@ -4,6 +4,8 @@
 
 [設計模式筆記](https://github.com/yuhuan0205/CSharpLearning/blob/main/Design_Patterns.md)
 
+[SQL筆記](https://github.com/yuhuan0205/CSharpLearning/blob/main/SQL_Note.md)
+
 [Useful Link](https://github.com/yuhuan0205/CSharpLearning/blob/main/Useful_Link.md)
 
 ## C# Knowledge
