@@ -3,3 +3,4 @@
 * [Asp.Net教學](https://ithelp.ithome.com.tw/articles/10238047)
 * [綜合性參考](https://home.gamer.com.tw/creationCategory.php?page=9&owner=s1234567&v=3&c=386764)
 * [OWIN詳解](https://blog.darkthread.net/blog/about-owin/)
+* [UML觀念](https://www.readfog.com/a/1639194161870639104)
