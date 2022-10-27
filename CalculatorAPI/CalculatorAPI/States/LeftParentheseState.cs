@@ -129,10 +129,23 @@ namespace CalculatorAPI.States
         /// <summary>
         /// after click equal, add operand into Elements.
         /// </summary>
-        public void EqualClick()
+        /// <param name="computeEnging"> a computingEngine </param>
+        /// <returns> EqualState </returns>
+        public IState GetResult(IEngine computeEnging)
         {
             NumberElement number = new NumberElement(Memory.GetDigits());
             Memory.AddElement(number);
+            //make all single left parenthese become a pair.
+            for (int singleParenthese = Memory.GetParentheseCounts(); singleParenthese > 0; singleParenthese--)
+            {
+                Memory.AddElement(new RightParenthese());
+            }
+
+            MessageObject message = computeEnging.GetResult(Memory.GetInfix());
+            Memory.SetDigits(message.InputNumber);
+            Memory.SetCalculatedProcess(message.CalculatedProcess);
+            Memory.SetParentheseCounts(0);
+            return new EqualState(Memory);
         }
 
         /// <summary>
@@ -142,6 +155,17 @@ namespace CalculatorAPI.States
         public IState SquareRoot()
         {
             return this;
+        }
+
+        /// <summary>
+        /// reset Digits
+        /// </summary>
+        /// <returns>InitialState</returns>
+        public IState ResetDigits()
+        {
+            Memory.ClearDigits();
+            Memory.AddDigit(Consts.ZERO_STRING);
+            return new InitialState(Memory);
         }
     }
 }

@@ -22,7 +22,6 @@
         /// remove calculator instence by user's id.
         /// </summary>
         /// <param name="id"> user's id </param>
-        /// <returns> has the task done? </returns>
         public void LogOut(string id);
     }
 }

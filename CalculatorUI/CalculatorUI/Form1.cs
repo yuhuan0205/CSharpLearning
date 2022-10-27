@@ -37,18 +37,8 @@ namespace CalculatorUI
         private async void InitMembers()
         {
             Client = new HttpClient { BaseAddress = new Uri("https://localhost:5001/") };
-            Id = await GetId();
-        }
-
-        /// <summary>
-        /// call api to get id.
-        /// </summary>
-        /// <returns>id</returns>
-        private async Task<string> GetId()
-        {
             HttpResponseMessage response = await Client.GetAsync("enroll");
-            string idString = await response.Content.ReadAsStringAsync();
-            return idString;
+            Id = await response.Content.ReadAsStringAsync();
         }
 
         /// <summary>

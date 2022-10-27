@@ -77,9 +77,12 @@ namespace CalculatorAPI.States
         /// <summary>
         /// set digits zero
         /// </summary>
-        public override void EqualClick()
+        /// <param name="computeEnging"> a computingEngine </param>
+        /// <returns> initialState </returns>
+        public override IState GetResult(IEngine computeEnging)
         {
             Memory.SetDigits(Consts.ZERO_STRING);
+            return new InitialState(Memory);
         }
 
         /// <summary>

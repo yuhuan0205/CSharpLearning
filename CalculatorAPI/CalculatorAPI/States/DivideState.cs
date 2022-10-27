@@ -66,5 +66,21 @@ namespace CalculatorAPI.States
         {
             return this;
         }
+
+        /// <summary>
+        /// triggered when user type / and then type zero then type =. 
+        /// </summary>
+        /// <param name="computeEnging"> a computingEngine </param>
+        /// <returns> ErrorState </returns>
+        public override IState GetResult(IEngine computeEnging)
+        {
+            for (; ZeroCount == Consts.ZERO;)
+            {
+                return base.GetResult(computeEnging);
+            }
+            Memory.ClearCalculatedProcess();
+            Memory.SetDigits(Consts.DIVIDE_BY_ZERO_ERROR);
+            return new ErrorState(Memory);
+        }
     }
 }

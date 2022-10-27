@@ -51,7 +51,6 @@ namespace CalculatorAPI
         /// remove unused ICalculator.
         /// </summary>
         /// <param name="id"> input id </param>
-        /// <returns> a bool repressent this operation has done.</returns>
         public void LogOut(string id)
         {
             ICalculator calculator = null;

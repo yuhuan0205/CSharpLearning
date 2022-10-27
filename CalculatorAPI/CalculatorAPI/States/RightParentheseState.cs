@@ -29,7 +29,6 @@ namespace CalculatorAPI.States
         /// <returns> OperatingState </returns>
         public IState AddOperator(IElement element)
         {
-            NumberElement number = new NumberElement(Memory.GetDigits());
             Memory.AddElement(element);
             return new OperatingState(Memory);
         }
@@ -41,8 +40,6 @@ namespace CalculatorAPI.States
         /// <returns> DivideState </returns>
         public IState AddOperatorDivide(IElement element)
         {
-            NumberElement number = new NumberElement(Memory.GetDigits());
-            Memory.AddElement(number);
             Memory.AddElement(element);
             return new DivideState(Memory);
         }
@@ -122,8 +119,21 @@ namespace CalculatorAPI.States
         /// <summary>
         /// in RightParentheseState operand will not add into Elements.
         /// </summary>
-        public void EqualClick()
+        /// <param name="computeEnging"> a computingEngine </param>
+        /// <returns> EqualState </returns>
+        public IState GetResult(IEngine computeEnging)
         {
+            //make all single left parenthese become a pair.
+            for (int singleParenthese = Memory.GetParentheseCounts(); singleParenthese > 0; singleParenthese--)
+            {
+                Memory.AddElement(new RightParenthese());
+            }
+
+            MessageObject message = computeEnging.GetResult(Memory.GetInfix());
+            Memory.SetDigits(message.InputNumber);
+            Memory.SetCalculatedProcess(message.CalculatedProcess);
+            Memory.SetParentheseCounts(0);
+            return new EqualState(Memory);
         }
 
         /// <summary>
@@ -132,6 +142,17 @@ namespace CalculatorAPI.States
         /// <returns> this state. </returns>
         public IState SquareRoot()
         {
+            return this;
+        }
+
+        /// <summary>
+        /// reset Digits
+        /// </summary>
+        /// <returns>this State</returns>
+        public IState ResetDigits()
+        {
+            Memory.ClearDigits();
+            Memory.AddDigit(Consts.ZERO_STRING);
             return this;
         }
     }

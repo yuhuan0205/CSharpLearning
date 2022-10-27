@@ -2,6 +2,7 @@
 using CalculatorAPI.Interfaces;
 using System.Text.Json;
 using CalculatorAPI.Elements;
+using System;
 
 namespace CalculatorAPI
 {
@@ -60,9 +61,7 @@ namespace CalculatorAPI
         /// </summary>
         public void ResetDigits()
         {
-            Memory.ClearDigits();
-            Memory.AddDigit(Consts.ZERO_STRING);
-            State = new InitialState(Memory);
+            State = State.ResetDigits();
         }
 
         /// <summary>
@@ -131,22 +130,7 @@ namespace CalculatorAPI
         /// </summary>
         public void GetResult()
         {
-            State.EqualClick();
-
-            //make all single left parenthese become a pair.
-            for (int singleParenthese = Memory.GetParentheseCounts(); singleParenthese > 0; singleParenthese--)
-            { 
-                Memory.AddElement(new RightParenthese());
-            }
-
-            // new a engine to compute
-            IEngine computeEnging = new EngineTree(Memory.GetInfix());
-
-            MessageObject message = computeEnging.GetResult();
-            Memory.SetDigits(message.InputNumber);
-            Memory.SetCalculatedProcess(message.CalculatedProcess);
-            Memory.SetParentheseCounts(0);
-            State = new EqualState(Memory);
+            State = State.GetResult(new EngineTree());
         }
 
         /// <summary>

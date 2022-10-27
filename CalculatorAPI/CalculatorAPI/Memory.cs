@@ -79,6 +79,7 @@ namespace CalculatorAPI
         public void ClearCalculatedProcess()
         {
             Elements.Clear();
+            ParentheseCount = Consts.ZERO;
             CalculatedProcessBuilder.Clear();
             CalculatedProcess = CalculatedProcessBuilder.ToString();
         }

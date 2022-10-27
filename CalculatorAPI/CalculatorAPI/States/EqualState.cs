@@ -84,6 +84,7 @@ namespace CalculatorAPI.States
         {
             Memory.ClearCalculatedProcess();
             Memory.ClearDigits();
+            Memory.AddDigit(Consts.ZERO_STRING);
             Memory.AddElement(element);
             Memory.SetParentheseCounts(Memory.GetParentheseCounts() + Consts.ONE);
             return new LeftParentheseState(Memory);
@@ -135,10 +136,13 @@ namespace CalculatorAPI.States
         /// <summary>
         /// after click equal, add operand into Elements.
         /// </summary>
-        public void EqualClick()
+        /// <param name="computeEnging"> a computingEngine </param>
+        /// <returns> EqualState </returns>
+        public IState GetResult(IEngine computeEnging)
         {
-            NumberElement number = new NumberElement(Memory.GetDigits());
-            Memory.AddElement(number);
+            //NumberElement number = new NumberElement(Memory.GetDigits());
+            //Memory.AddElement(number);
+            return this;
         }
 
         /// <summary>
@@ -155,6 +159,17 @@ namespace CalculatorAPI.States
                 return new ErrorState(Memory);
             }
             Memory.SetDigits(root.ToString());
+            return new InitialState(Memory);
+        }
+
+        /// <summary>
+        /// reset Digits
+        /// </summary>
+        /// <returns>InitialState</returns>
+        public IState ResetDigits()
+        {
+            Memory.ClearDigits();
+            Memory.AddDigit(Consts.ZERO_STRING);
             return new InitialState(Memory);
         }
     }

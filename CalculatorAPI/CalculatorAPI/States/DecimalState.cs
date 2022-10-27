@@ -36,6 +36,12 @@ namespace CalculatorAPI.States
         /// <returns> OperatingState </returns>
         public IState AddOperator(IElement element)
         {
+            for (; PointIndex == 0;)
+            {
+                Memory.RemoveLastDigit();
+                break;
+            }
+
             NumberElement number = new NumberElement(Memory.GetDigits());
             Memory.AddElement(number);
             Memory.AddElement(element);
@@ -49,6 +55,11 @@ namespace CalculatorAPI.States
         /// <returns> DivideState </returns>
         public IState AddOperatorDivide(IElement element)
         {
+            for (; PointIndex == 0;)
+            {
+                Memory.RemoveLastDigit();
+                break;
+            }
             NumberElement number = new NumberElement(Memory.GetDigits());
             Memory.AddElement(number);
             Memory.AddElement(element);
@@ -108,6 +119,11 @@ namespace CalculatorAPI.States
         {
             for (; Memory.GetParentheseCounts() != 0;)
             {
+                for (; PointIndex == 0;)
+                {
+                    Memory.RemoveLastDigit();
+                    break;
+                }
                 NumberElement number = new NumberElement(Memory.GetDigits());
                 Memory.AddElement(number);
                 Memory.AddElement(element);
@@ -143,6 +159,12 @@ namespace CalculatorAPI.States
         /// <returns> this state </returns>
         public IState ChangeSign()
         {
+            for (; PointIndex == 0;)
+            {
+                Memory.RemoveLastDigit();
+                PointIndex--;
+                break;
+            }
             Memory.SetDigits((Convert.ToDecimal(Memory.GetDigits()) * -1).ToString());
             return this;
         }
@@ -150,10 +172,29 @@ namespace CalculatorAPI.States
         /// <summary>
         /// after click equal, add operand into Elements.
         /// </summary>
-        public void EqualClick()
+        /// <param name="computeEnging"> a computingEngine </param>
+        /// <returns> EqualState </returns>
+        public IState GetResult(IEngine computeEnging)
         {
+            for (; PointIndex == 0;)
+            {
+                Memory.RemoveLastDigit();
+                break;
+            }
             NumberElement number = new NumberElement(Memory.GetDigits());
             Memory.AddElement(number);
+
+            //make all single left parenthese become a pair.
+            for (int singleParenthese = Memory.GetParentheseCounts(); singleParenthese > 0; singleParenthese--)
+            {
+                Memory.AddElement(new RightParenthese());
+            }
+
+            MessageObject message = computeEnging.GetResult(Memory.GetInfix());
+            Memory.SetDigits(message.InputNumber);
+            Memory.SetCalculatedProcess(message.CalculatedProcess);
+            Memory.SetParentheseCounts(0);
+            return new EqualState(Memory);
         }
 
         /// <summary>
@@ -170,6 +211,17 @@ namespace CalculatorAPI.States
                 return new ErrorState(Memory);
             }
             Memory.SetDigits(root.ToString());
+            return new InitialState(Memory);
+        }
+
+        /// <summary>
+        /// reset Digits
+        /// </summary>
+        /// <returns>InitialState</returns>
+        public IState ResetDigits()
+        {
+            Memory.ClearDigits();
+            Memory.AddDigit(Consts.ZERO_STRING);
             return new InitialState(Memory);
         }
     }

@@ -71,8 +71,16 @@
         public IState AddRightParenthese(IElement element);
 
         /// <summary>
-        /// after click equal.
+        /// Equal Btn clicked, get the Result.
         /// </summary>
-        public void EqualClick();
+        /// <param name="computeEnging"> a computingEngine </param>
+        /// <returns>next state.</returns>
+        public IState GetResult(IEngine computeEnging);
+        
+        /// <summary>
+        /// reset digits.
+        /// </summary>
+        /// <returns> next state. </returns>
+        public IState ResetDigits();
     }
 }

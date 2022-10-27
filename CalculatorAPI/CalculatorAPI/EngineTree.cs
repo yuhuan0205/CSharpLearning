@@ -32,10 +32,9 @@ namespace CalculatorAPI
         /// <summary>
         /// Constructor.
         /// </summary>
-        /// <param name="infix"> a infix expression. </param>
-        public EngineTree(List<IElement> infix)
+        public EngineTree()
         {
-            Infix = infix;
+            Infix = new List<IElement>();
             Postfix = new List<IElement>();
             Prefix = new List<IElement>();
             Root = null;
@@ -118,9 +117,11 @@ namespace CalculatorAPI
         /// A function for calculator calling.
         /// In order to get answer, prefix and postfix from infix expression.
         /// </summary>
+        /// <param name="infix"> infix expression </param>
         /// <returns> a jsonlike object contain answer and expression(infix, postfix, prefix) </returns>
-        public MessageObject GetResult()
+        public MessageObject GetResult(List<IElement> infix)
         {
+            Infix = infix;
             Postfix = InfixToPostfix(Infix);
             Root = PostfixToExpressionTree(Postfix);
             string Answer = TraverseTreeGetAnswer(Root);
