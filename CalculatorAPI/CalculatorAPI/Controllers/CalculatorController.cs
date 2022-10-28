@@ -11,7 +11,7 @@ namespace CalculatorAPI.Controllers
         /// <summary>
         /// CalculatorPool contains lots of calculators.
         /// </summary>
-        private ICalculatorPool CalculatorPool;
+        private readonly ICalculatorPool CalculatorPool;
 
         /// <summary>
         /// create a singleton CalculatorPool with DI.
@@ -50,8 +50,7 @@ namespace CalculatorAPI.Controllers
         [HttpGet("status/{id}")]
         public string GetStatus(string id)
         {
-            ICalculator calculator = CalculatorPool.GetCalculatorById(id);
-            return calculator.GetStatus();
+            return CalculatorPool.GetCalculatorById(id).GetStatus();
         }
 
         /// <summary>
@@ -62,8 +61,7 @@ namespace CalculatorAPI.Controllers
         [HttpGet("input/{id}/{digit}")]
         public void DigitBtnClick(string id, string digit)
         {
-            ICalculator calculator = CalculatorPool.GetCalculatorById(id);
-            calculator.AddDigit(digit);
+            CalculatorPool.GetCalculatorById(id).AddDigit(digit);
         }
 
         /// <summary>
@@ -73,8 +71,7 @@ namespace CalculatorAPI.Controllers
         [HttpGet("inputzero/{id}")]
         public void ZeroBtnClick(string id)
         {
-            ICalculator calculator = CalculatorPool.GetCalculatorById(id);
-            calculator.AddDigitZero();
+            CalculatorPool.GetCalculatorById(id).AddDigitZero();
         }
 
         /// <summary>
@@ -84,8 +81,7 @@ namespace CalculatorAPI.Controllers
         [HttpGet("add/{id}")]
         public void AddBtnClick(string id)
         {
-            ICalculator calculator = CalculatorPool.GetCalculatorById(id);
-            calculator.AddOperator(new Adder());
+            CalculatorPool.GetCalculatorById(id).AddOperator(new Adder());
         }
 
         /// <summary>
@@ -95,8 +91,7 @@ namespace CalculatorAPI.Controllers
         [HttpGet("minus/{id}")]
         public void MinusBtnClick(string id)
         {
-            ICalculator calculator = CalculatorPool.GetCalculatorById(id);
-            calculator.AddOperator(new Minuser());
+            CalculatorPool.GetCalculatorById(id).AddOperator(new Minuser());
         }
 
         /// <summary>
@@ -106,8 +101,7 @@ namespace CalculatorAPI.Controllers
         [HttpGet("multipy/{id}")]
         public void MultipyBtnClick(string id)
         {
-            ICalculator calculator = CalculatorPool.GetCalculatorById(id);
-            calculator.AddOperator(new Multipyer());
+            CalculatorPool.GetCalculatorById(id).AddOperator(new Multipyer());
         }
 
         /// <summary>
@@ -117,8 +111,7 @@ namespace CalculatorAPI.Controllers
         [HttpGet("divide/{id}")]
         public void DivideBtnClick(string id)
         {
-            ICalculator calculator = CalculatorPool.GetCalculatorById(id);
-            calculator.AddOperatorDivide(new Divider());
+            CalculatorPool.GetCalculatorById(id).AddOperatorDivide(new Divider());
         }
 
         /// <summary>
@@ -128,8 +121,7 @@ namespace CalculatorAPI.Controllers
         [HttpGet("backspace/{id}")]
         public void BackspaceBtnClick(string id)
         {
-            ICalculator calculator = CalculatorPool.GetCalculatorById(id);
-            calculator.Backspace();
+            CalculatorPool.GetCalculatorById(id).Backspace();
         }
 
         /// <summary>
@@ -139,8 +131,7 @@ namespace CalculatorAPI.Controllers
         [HttpGet("changesign/{id}")]
         public void ChangeSignBtnClick(string id)
         {
-            ICalculator calculator = CalculatorPool.GetCalculatorById(id);
-            calculator.ChangeSign();
+            CalculatorPool.GetCalculatorById(id).ChangeSign();
         }
 
         /// <summary>
@@ -150,8 +141,7 @@ namespace CalculatorAPI.Controllers
         [HttpGet("squareroot/{id}")]
         public void SquareRootBtnClick(string id)
         {
-            ICalculator calculator = CalculatorPool.GetCalculatorById(id);
-            calculator.SquareRoot();
+            CalculatorPool.GetCalculatorById(id).SquareRoot();
         }
 
         /// <summary>
@@ -161,8 +151,7 @@ namespace CalculatorAPI.Controllers
         [HttpGet("point/{id}")]
         public void PointBtnClick(string id)
         {
-            ICalculator calculator = CalculatorPool.GetCalculatorById(id);
-            calculator.AddPoint();
+            CalculatorPool.GetCalculatorById(id).AddPoint();
         }
 
         /// <summary>
@@ -172,8 +161,7 @@ namespace CalculatorAPI.Controllers
         [HttpGet("ce/{id}")]
         public void CEBtnClick(string id)
         {
-            ICalculator calculator = CalculatorPool.GetCalculatorById(id);
-            calculator.ResetDigits();
+            CalculatorPool.GetCalculatorById(id).ResetDigits();
         }
 
         /// <summary>
@@ -195,8 +183,7 @@ namespace CalculatorAPI.Controllers
         [HttpGet("getresult/{id}")]
         public void EqualBtnClick(string id)
         {
-            ICalculator calculator = CalculatorPool.GetCalculatorById(id);
-            calculator.GetResult();
+            CalculatorPool.GetCalculatorById(id).GetResult();
         }
 
         /// <summary>
@@ -206,8 +193,7 @@ namespace CalculatorAPI.Controllers
         [HttpGet("leftparenthese/{id}")]
         public void LeftParentheseBtnClick(string id)
         {
-            ICalculator calculator = CalculatorPool.GetCalculatorById(id);
-            calculator.AddLeftParenthese(new LeftParenthese());
+           CalculatorPool.GetCalculatorById(id).AddLeftParenthese(new LeftParenthese());
         }
 
         /// <summary>
@@ -217,8 +203,7 @@ namespace CalculatorAPI.Controllers
         [HttpGet("rightparenthese/{id}")]
         public void RightParentheseBtnClick(string id)
         {
-            ICalculator calculator = CalculatorPool.GetCalculatorById(id);
-            calculator.AddRightParenthese(new RightParenthese());
+            CalculatorPool.GetCalculatorById(id).AddRightParenthese(new RightParenthese());
         }
     }
 }

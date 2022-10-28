@@ -53,7 +53,7 @@ namespace CalculatorAPI
         /// <param name="id"> input id </param>
         public void LogOut(string id)
         {
-            ICalculator calculator = null;
+            ICalculator calculator;
             Pool.TryRemove(id, out calculator);
         }
     }

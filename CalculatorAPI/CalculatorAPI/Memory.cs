@@ -58,8 +58,7 @@ namespace CalculatorAPI
         /// <param name="digit"> a digit </param>
         public void AddDigit(string digit)
         {
-            InputDigitsBuilder.Append(digit);
-            InputDigits = InputDigitsBuilder.ToString();
+            InputDigits = InputDigitsBuilder.Append(digit).ToString();
         }
 
         /// <summary>
@@ -69,8 +68,7 @@ namespace CalculatorAPI
         public void AddElement(IElement element)
         {
             Elements.Add(element);
-            CalculatedProcessBuilder.Append(element.GetValueString());
-            CalculatedProcess = CalculatedProcessBuilder.ToString();
+            CalculatedProcess = CalculatedProcessBuilder.Append(element.GetValueString()).ToString();
         }
 
         /// <summary>
@@ -80,8 +78,7 @@ namespace CalculatorAPI
         {
             Elements.Clear();
             ParentheseCount = Consts.ZERO;
-            CalculatedProcessBuilder.Clear();
-            CalculatedProcess = CalculatedProcessBuilder.ToString();
+            CalculatedProcess = CalculatedProcessBuilder.Clear().ToString();
         }
 
         /// <summary>
@@ -99,8 +96,7 @@ namespace CalculatorAPI
         /// </summary>
         public void ClearDigits()
         {
-            InputDigitsBuilder.Clear();
-            InputDigits = InputDigitsBuilder.ToString();
+            InputDigits = InputDigitsBuilder.Clear().ToString();
         }
 
         /// <summary>

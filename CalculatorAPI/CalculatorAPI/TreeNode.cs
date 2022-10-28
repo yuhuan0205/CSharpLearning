@@ -21,5 +21,6 @@ namespace CalculatorAPI
         /// node's right child.
         /// </summary>
         public TreeNode RightNode { get; set; }
+
     }
 }
