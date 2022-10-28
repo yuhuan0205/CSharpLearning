@@ -138,6 +138,14 @@ decimal(9,2)代表什麼跟decimal(19,4)差別？
 INSERT INTO [StockDB].[dbo].[日收盤_新人訓練_陳祐桓欄位-型態](日期, 股票代碼, 股票名稱, 開盤價)
  VALUES(20181218, 0000, '測試', 0);
 ```
+
+## 第十五題
+
+```SQL
+INSERT INTO [StockDB].[DBO].[日收盤_新人訓練_陳祐桓欄位-型態]
+ SELECT [CTIME], [MTIME], [RecordID], [日期], [股票代號], [股票名稱], [開盤價], [最高價], [最低價], [收盤價], [漲跌] FROM [StockDB].[dbo].[日收盤] WHERE 日期 LIKE 20181214;
+```
+
 ## 第六十四題
 Temp Table 是什麼？
 
