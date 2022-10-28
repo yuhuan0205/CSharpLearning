@@ -43,10 +43,17 @@ SELECT
 * (補充) smallint 整數，範圍從 `(-2^15) ~ (2^15 -1)` `2bytes(2^16)` 前 1個 bit 存 sign，後15個 bits 存數字。
 * int 整數，範圍從 `(-2^31) ~ (2^31 -1)` `4 bytes(2^32)` 前 1個 bit 存 sign，後31個 bits 存數字。
 * bigint 整數，範圍從 `(-2^63) ~ (2^63 -1)` `8 bytes(2^64)` 前 1個 bit 存 sign，後63個 bits 存數字。
-* real
-* float
-* decimal
-* numeric
+* real 浮點數(近似值)
+* float 浮點數(近似值)
+* numeric 精確位數，使用時須指定 (精確度, 小數點後位數)，資料範圍`-10^38 ~ 10^38 - 1`，儲存大小則視精確位數決定：
+```
+精確度，可指定範圍 1~38，小數位數則是最小為 0，最大不能超過指定的精確度。
+1-9 : 5bytes
+10-19 : 9bytes
+20-28 : 13bytes
+29-38 : 17bytes
+```
+* decimal 基本上與numeric無異，除了 `decimal會保留超出精確度的數值，numeric則完全依照指定的規範儲存。 `
 #### 字串
 * char
 * nchar
