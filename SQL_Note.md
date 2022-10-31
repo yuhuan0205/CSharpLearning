@@ -1,9 +1,5 @@
 # SQL 練習題目及答案
 
-primary 只能有一個，可以由多個key組成，必須為唯一不可重複的key。
-
-foreign key 則是其他 table 的 primary key。
-
 資料完整性：
 * 實體完整性：Database會拒絕加入重複的primary key來保證實體完整性。
 * 區域完整性：Database會拒絕加入資料類型超出預設範圍的資料，來確保區域完整性。
@@ -11,7 +7,23 @@ foreign key 則是其他 table 的 primary key。
 
 語法：
 ```SQL
-USE database_name // ;
+/* 可以複製表結構到新表 */
+SELECT * INTO new_table FROM TABLE_A WHERE 1 = 0;
+
+SELECT DISTINCT COL FROM TABLE_A;
+SELECT TOP n * FROM TABLE_A;
+SELECT TOP n PERCENT * FROM TABLE_A;
+
+/* 針對每個在CUBE裡的欄位做分組 COL1 + COL2, COL1 + NULL, COL2 + NULL, NULL + NULL */
+SELECT COL1, COL2, SUM(COUNTS) AS Total
+FROM TABLE_A
+GROUP BY CUBE(COL1, COL2)
+
+/* 針對每個在ROLLUP裡第一個欄位做分組 COL1 + COL2, COL1 + NULL, NULL + NULL */
+SELECT COL1, COL2, SUM(COUNTS) AS Total
+FROM TABLE_A
+GROUP BY ROLLUP(COL1, COL2)
+
 ```
 ## 第一題
 請在192.168.10.180的StockDB底下建立一張資料表，資料表需求如下：
@@ -267,8 +279,67 @@ DROP TABLE TABLE_A;
 ## 第十九題
 找出日期為 20181206的所有資料
 ```SQL
-
+SELECT * FROM [StockDB].[dbo].[日收盤]
+WHERE [日期] LIKE '20181206';
 ```
+
+## 第二十題
+股票代號為0050、006201、00680L、00721B
+日期在20181201到20181206的所有資料
+```SQL
+SELECT * FROM [StockDB].[dbo].[日收盤]
+WHERE [日期] LIKE '20181206';
+```
+
+## 第四十二題
+UNION、UNION ALL差別?
+
+
+## 第四十四題
+解釋 INNER JOIN、RIGHT JOIN、LEFT JOIN、OUTER JOIN
+
+JOIN的時候，有分成 *左表* 與 *右表* ，根據設定的條件合併左右兩表。
+* INNER JOIN 是預設的 JOIN，只顯示符合條件後合併的資料。
+* RIGHT JOIN 顯示符合條件後合併的資料，以及右表不符合條件的資料(沒有合併到的欄位為NULL)。
+* LEFT JOIN 顯示符合條件後合併的資料，以及左表不符合條件的資料(沒有合併到的欄位為NULL)。
+* OUTTER JOIN 顯示符合條件後合併的資料，以及兩表不符合條件的資料(沒有合併到的欄位為NULL)。
+
+`表左`
+|水果|進價|
+|---|---|
+|香蕉|20|
+|蘋果|30|
+
+`表右`
+|水果|售價|
+|---|---|
+|香蕉|40|
+|西瓜|50|
+
+`INNER JOIN ON 水果`
+|水果|進價|售價|
+|---|---|---|
+|香蕉|20|40|
+
+`RIGHT JOIN ON 水果`
+|水果|進價|售價|
+|---|---|---|
+|香蕉|20|40|
+|西瓜|NULL|40|
+
+`LEFT JOIN ON 水果`
+|水果|進價|售價|
+|---|---|---|
+|香蕉|20|40|
+|蘋果|30|NULL|
+
+`OUTTER JOIN ON 水果`
+|水果|進價|售價|
+|---|---|---|
+|香蕉|20|40|
+|蘋果|30|NULL|
+|西瓜|NULL|40|
+
 
 ## 第六十四題
 Temp Table 是什麼？
