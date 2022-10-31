@@ -34,7 +34,7 @@ CTIME預設值：getdate()
 ```
 Answer
 ```Sql
-CREATE TABLE StockDB.dbo.[日收盤_新人訓練_陳祐桓欄位-型態]
+CREATE TABLE [StockDB].[dbo].[日收盤_新人訓練_陳祐桓欄位-型態]
 (
 	[CTIME] datetime,
 	[MTIME] int,
@@ -177,17 +177,97 @@ Primary Key與UNIQUE的差異：
 
 `疑惑：若A表有一外鍵指向B表UNIQUE之欄位，當B表的UNIQUE欄位中有NULL時，A表外鍵插入NULL會指向哪裡？`
 
+## 第十題
+VIEW是什麼？
+
+VIEW 檢視表 － 是一個將查詢敘述簡化的資料呈現方式，可以將冗長的查詢敘述替換成一個檢視表，以利日後重複使用該查詢敘述。VIEW只儲存敘述而不儲存資料，資料依舊是從資料表中取得，因此檢視表並不佔用空間。
+
+## 第十一題
+什麼情況下會使用VIEW？
+
+* 當一個查詢敘述很常使用，就可以考慮使用VIEW替代該敘述來增加可讀性。
+* 針對不同的使用者建立不同的檢視表，可以限制使用者所能看到的資料。來自同一份資料表的資料可以利用VIEW根據不同的情境給予使用者不同的資料。
+* 可以隔離程式與底層資料，防止其耦合程度過高。當底層資料表結構改變時，只需要改變VIEW而不用更改程式
+
+
 ## 第十二題
+請使用語法新增一筆資料到第一題所建立的表中
 ```SQL
 INSERT INTO [StockDB].[dbo].[日收盤_新人訓練_陳祐桓欄位-型態](日期, 股票代碼, 股票名稱, 開盤價)
- VALUES(20181218, 0000, '測試', 0);
+ VALUES('20181218', '0000', '測試', 0);
+```
+
+## 第十三題
+請使用語法校正上一題新增的資料
+```SQL
+UPDATE [StockDB].[dbo].[日收盤_新人訓練_陳祐桓欄位-型態]
+SET 開盤價 = 1
+WHERE 股票名稱 LIKE '測試';
+/*補充：SET的WHERE也可以比對多個資料表*/
+UPDATE TABLE_A
+SET ...
+FROM TABLE_B
+WHERE TABLE_A.ID = TABLE_B.ID;
+```
+
+## 第十四題
+請使用語法刪除上一題修改的資料
+```SQL
+DELETE [StockDB].[dbo].[日收盤_新人訓練_陳祐桓欄位-型態]
+WHERE 開盤價 = 1;
+
+/*條件來自其他表*/
+DELETE TABLE_A
+FROM TABLE_B
+WHERE TABLE_A.ID = TABLE_B.ID;
 ```
 
 ## 第十五題
-
+請使用語法新增資料到第一題所建立的表中
 ```SQL
 INSERT INTO [StockDB].[DBO].[日收盤_新人訓練_陳祐桓欄位-型態]
- SELECT [CTIME], [MTIME], [RecordID], [日期], [股票代號], [股票名稱], [開盤價], [最高價], [最低價], [收盤價], [漲跌] FROM [StockDB].[dbo].[日收盤] WHERE 日期 LIKE 20181214;
+ SELECT [CTIME], [MTIME], [RecordID], [日期], [股票代號], [股票名稱], [開盤價], [最高價], [最低價], [收盤價], [漲跌] FROM [StockDB].[dbo].[日收盤] WHERE 日期 LIKE '20181214';
+```
+
+## 第十六題
+請使用兩種不同語法一次刪除第一題所建立的資料表內的所有資料
+```SQL
+DELETE [StockDB].[DBO].[日收盤_新人訓練_陳祐桓欄位-型態];
+
+TRUNCATE TABLE [StockDB].[DBO].[日收盤_新人訓練_陳祐桓欄位-型態];
+```
+
+## 第十七題
+請使用語法刪除第一題建出來的table
+```SQL
+DROP TABLE [StockDB].[dbo].[日收盤_新人訓練_陳祐桓欄位-型態];
+```
+
+## 第十八題
+以下語法有何差異?
+```SQL
+/* DELETE 屬於 DML 會被記錄到交易日誌中，執行後不會馬上把資料清掉，而是標記為刪除，可以回復資料。*/
+/* 此操作並不會刪除表結構、索引、約束條件*/
+/* 可作用於檢視圖 */
+DELETE FROM TABLE_A;
+
+/* TRUNCATE 屬於 DDL 不會被記錄到交易日誌中，執行後後馬上把資料清掉，無法回復資料。*/
+/* 有被其他表使用外鍵參考的話，該表無法使用 TRUNCATE*/
+/* 此操作並不會刪除表結構、索引、約束條件*/
+/* 不可作用於檢視圖 */
+TRUNCATE TABLE TABLE_A;
+
+/* DROP 屬於 DDL 不會被記錄到交易日誌，並且表結構會連同資料一起被刪除，若有被參考，則會連約束條件一起改為INVAILD狀態*/
+/* 可作用於檢視圖 */
+DROP TABLE TABLE_A;
+```
+
+`網路上簡單說明：我手上有瓶可樂，DELETE就是把可樂藏起來了，但可樂跟瓶子都還在；TRUNCATE就是把可樂喝完了，留了個瓶子；DROP就是可樂喝完了，瓶子也丟了。`
+
+## 第十九題
+找出日期為 20181206的所有資料
+```SQL
+
 ```
 
 ## 第六十四題
@@ -204,13 +284,13 @@ Temporary table分成三種
 ```SQL
 USE StockDB;
 /* 區域暫存表 */
-SELECT * INTO [#tempTable] FROM [日收盤] WHERE [日期] LIKE 20181214;
+SELECT * INTO [#tempTable] FROM [日收盤] WHERE [日期] LIKE '20181214';
 
 /* 全域暫存表 */
-SELECT * INTO [##tempTable] FROM [日收盤] WHERE [日期] LIKE 20181214;
+SELECT * INTO [##tempTable] FROM [日收盤] WHERE [日期] LIKE '20181214';
 
 /* 資料表變數 */
-SELECT * INTO [@tempTable] FROM [日收盤] WHERE [日期] LIKE 20181214;
+SELECT * INTO [@tempTable] FROM [日收盤] WHERE [日期] LIKE '20181214';
 ```
 
 ## 第六十六題
