@@ -24,6 +24,16 @@ SELECT COL1, COL2, SUM(COUNTS) AS Total
 FROM TABLE_A
 GROUP BY ROLLUP(COL1, COL2)
 
+/* 萬用字元 */
+/* % 代表數個任意字元*/
+'%SQL%'
+/* _代表一個任意字元 */
+'__筆' /* 螢光筆，原子筆 */
+/* []範圍內的字 */
+'[A-C]at', '[ABCD]at' /* Bat, Cat */
+/* 不在[^]範圍內的字 */
+'[^A-C]at' /* Eat, Rat */
+
 ```
 ## 第一題
 請在192.168.10.180的StockDB底下建立一張資料表，資料表需求如下：
@@ -288,12 +298,53 @@ WHERE [日期] LIKE '20181206';
 日期在20181201到20181206的所有資料
 ```SQL
 SELECT * FROM [StockDB].[dbo].[日收盤]
-WHERE [日期] LIKE '20181206';
+WHERE (日期 BETWEEN '20181201' AND '20181206') AND 股票代號 IN ('0050', '006201', '00721B');
 ```
+
+## 第二十一題
+所有20181201到20181206中不相同的股票代號
+```SQL
+SELECT DISTINCT 股票代號 FROM [StockDB].[dbo].[日收盤]
+WHERE (日期 BETWEEN '20181201' AND '20181206');
+```
+
+## 第二十二題
+2018年每個日期的資料筆數
+```SQL
+SELECT 日期, COUNT(*) AS 資料筆數 FROM [StockDB].[dbo].[日收盤]
+GROUP BY 日期
+HAVING 日期 LIKE '2018%'
+```
+
+## 第二十三題
+每檔股票在20181201到20181206的開盤價總和、最小最高價、最大最低價、平均收盤價
+```SQL
+SELECT 股票代號, SUM(開盤價) AS 開盤價總和, MIN(最高價) AS 最小最高價, MAX(最低價) AS 最大最低價, AVG(收盤價) AS 平均收盤價 FROM [StockDB].[dbo].[日收盤]
+WHERE 日期 BETWEEN '20181201' AND '20181206'
+GROUP BY 股票代號;
+```
+
+## 第二十四題
+所有在20181201到20181206 不相同股票名稱的前兩個字
+```SQL
+SELECT DISTINCT 股票名稱, SUBSTRING(股票名稱,0,3) AS 縮寫 FROM [StockDB].[dbo].[日收盤]
+WHERE 日期 BETWEEN '20181201' AND '20181206'
+```
+
 
 ## 第四十二題
 UNION、UNION ALL差別?
 
+UNION會略掉重複的資料，UNION ALL 則會把所有資料都垂直合併。
+
+## 第四十三題
+UNION、EXCEPT、INTERSECT差別?畫出交集圖
+
+UNION為聯集，取出集合中所有元素。
+
+INTERSECT為交集，取出集合中有重疊的部分元素。
+
+EXCEPT為差集，取出第一個集合且不在第二個集合的元素。
 
 ## 第四十四題
 解釋 INNER JOIN、RIGHT JOIN、LEFT JOIN、OUTER JOIN
