@@ -331,6 +331,133 @@ SELECT DISTINCT 股票名稱, SUBSTRING(股票名稱,0,3) AS 縮寫 FROM [StockD
 WHERE 日期 BETWEEN '20181201' AND '20181206'
 ```
 
+## 第二十五題
+所有在20181201到20181206的不相同股票名稱且頭尾要去空白
+```SQL
+SELECT DISTINCT RTRIM (LTRIM(股票名稱)) AS 頭尾去空白 FROM [StockDB].[dbo].[日收盤]
+WHERE 日期 BETWEEN '20181201' AND '20181206'
+```
+
+## 第二十六題
+20181201到20181206的所有股票，先依照股票代號由大到小排序，再依照日期由小到大排序
+```SQL
+SELECT * FROM [StockDB].[dbo].[日收盤]
+WHERE 日期 BETWEEN '20181201' AND '20181206'
+ORDER BY 股票代號 DESC, CTIME ASC
+```
+
+## 第二十七題
+20181201到20181206所有平均收盤價低於80的股票代號
+```SQL
+SELECT 股票代號, AVG(收盤價) AS 平均收盤價 FROM [StockDB].[dbo].[日收盤]
+WHERE 日期 BETWEEN '20181201' AND '20181206'
+GROUP BY 股票代號
+HAVING AVG(收盤價) < 80
+```
+
+## 第二十八題
+2018年總資料筆數
+```SQL
+SELECT COUNT(*) AS 總資料筆數 FROM [StockDB].[dbo].[日收盤]
+WHERE 日期 LIKE '2018%'
+```
+
+## 第二十九題
+2018年忽略收盤價為null的總資料筆數，不能用where 收盤價 IS NOT NULL
+```SQL
+SELECT COUNT(*) AS 總資料筆數
+FROM ( (SELECT 股票代號, 日期 FROM [StockDB].[dbo].[日收盤]
+WHERE 日期 LIKE '2018%' )
+EXCEPT
+(SELECT 股票代號, 日期 FROM [StockDB].[dbo].[日收盤]
+WHERE 日期 LIKE '2018%' AND 收盤價 IS NULL
+)) AS 非空收盤價
+
+SELECT COUNT(*) AS 總資料筆數
+FROM [StockDB].[dbo].[日收盤]
+WHERE 日期 LIKE '2018%' AND (收盤價 >=0 OR 收盤價 < 0)
+```
+
+## 第三十題
+2018年股票代號長度大於4的所有不相同股票代號
+```SQL
+SELECT DISTINCT 股票代號 FROM [StockDB].[dbo].[日收盤]
+WHERE 日期 LIKE '2018%' AND LEN(股票代號) > 4
+```
+
+## 第三十一題
+2018年包含"指數"且不相同的股票名稱，在顯示股票名稱時把"指數"換成"__"
+```SQL
+SELECT DISTINCT REPLACE(股票名稱, '指數', '__') AS 名稱包含指數之股票 FROM [StockDB].[dbo].[日收盤]
+WHERE 日期 LIKE '2018%' AND 股票名稱 LIKE '%指數%'
+```
+
+## 第三十二題
+"今天"的所有資料，不能把日期寫死(可能沒有)
+```SQL
+/* 本日 */
+SELECT * from [StockDB].[DBO].[日收盤] 
+WHERE DATEDIFF(dd, CTIME, GETDATE()) = 0
+
+/* 3日內 */
+SELECT * from [StockDB].[DBO].[日收盤] 
+WHERE DATEDIFF(dd, CTIME, GETDATE()) <= 3
+
+/* 本月 */
+SELECT * from [StockDB].[DBO].[日收盤] 
+WHERE DATEDIFF(MM, CTIME, GETDATE()) = 0
+```
+
+## 第三十三題
+找到2018年所有股票代號1開頭的股票各自的第6個交易日資料
+```SQL
+
+```
+
+## 第三十四題
+20181206有但20181205沒有的股票代號
+```SQL
+SELECT DISTINCT 股票代號 FROM [StockDB].[dbo].[日收盤]
+WHERE [日期] LIKE '20181206'
+EXCEPT
+SELECT DISTINCT 股票代號 FROM [StockDB].[dbo].[日收盤]
+WHERE [日期] LIKE '20181205'
+```
+
+## 第三十五題
+20181206有但20181205也有的股票代號
+```SQL
+SELECT DISTINCT 股票代號 FROM [StockDB].[dbo].[日收盤]
+WHERE [日期] LIKE '20181206'
+INTERSECT 
+SELECT DISTINCT 股票代號 FROM [StockDB].[dbo].[日收盤]
+WHERE [日期] LIKE '20181205'
+```
+
+## 第三十六題
+2018所有日收盤資料加上該檔股票的英文名稱(使用[日收盤]、在[上市櫃資本資料表]中找出該筆資料所符合的年度與股票代號所對應的英文名稱)
+```SQL
+SELECT 日收盤.* , 上市櫃.英文名稱  
+FROM [StockDB].[dbo].[日收盤] AS 日收盤 JOIN [StockDB].[dbo].[上市櫃基本資料表] AS 上市櫃 ON 日收盤.股票代號 = 上市櫃.股票代號 AND SUBSTRING(日收盤.日期, 0, 5) LIKE  上市櫃.年度
+WHERE 日收盤.日期 LIKE '2018%'
+```
+
+## 第三十七題
+[ETF基本資料表]中2018年的資料，以及該ETF在20181214的[日收盤]資料，且[ETF基本資料表]的[名稱]與[日收盤]的[股票名稱]不同，顯示[ETF基本資料表]的[年度][名稱]，以及[日收盤]的[日期][股票名稱]。
+```SQL
+SELECT 日收盤.日期, 日收盤.股票名稱, ETF.年度, ETF.名稱 
+FROM (SELECT * FROM [StockDB].[dbo].[日收盤] WHERE 日期 LIKE '20181214' ) AS 日收盤 
+JOIN 
+(SELECT 年度, 名稱, 代號 FROM [StockDB].[dbo].[ETF基本資料表] WHERE 年度 LIKE '2018') AS ETF
+ON 日收盤.股票代號 = ETF.代號 AND SUBSTRING(日收盤.日期, 0, 5) LIKE  ETF.年度
+```
+
+## 第三十八題
+20181201到20181206的所有資料，[上市櫃]欄位的規則：[上市櫃] = 1時顯示上市，[上市櫃]=2時顯示上櫃，[上市櫃]=3時顯示興櫃，[上市櫃]=4時顯示公發，[上市櫃]=其他數字時顯示其他
+```SQL
+
+```
+
 
 ## 第四十二題
 UNION、UNION ALL差別?
