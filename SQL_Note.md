@@ -590,6 +590,40 @@ RETURN 2
 
 ## 第五十二題
 修改、刪除預存程序的語法？
+```SQL
+/* 修改 */
+ALTER PROC TWORETURN
+AS 
+	RETURN '2'
+
+/* 刪除 */
+DROP PROC TWORETURN
+```
+
+## 第五十三題
+預存程序可以如何回傳值？
+```SQL
+/* 透過RETURN 回傳值 */
+CREATE PROC TWORETURN 
+AS
+	RETURN 2
+
+GO
+
+DECLARE @two INT
+EXEC @two = TWORETURN 
+
+/* 透過OUTPUT參數 回傳值 */
+CREATE PROC TWORETURN @TWO INT OUTPUT
+AS
+	SELECT @TWO = 2
+
+GO
+
+DECLARE @two INT
+EXEC TWORETURN @two OUTPUT
+
+```
 
 ## 第六十四題
 Temp Table 是什麼？
