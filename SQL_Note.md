@@ -577,6 +577,28 @@ JOIN的時候，有分成 *左表* 與 *右表* ，根據設定的條件合併�
 |蘋果|30|NULL|
 |西瓜|NULL|40|
 
+## 第四十五題
+
+```SQL
+DECLARE @上市最新年度 char(4)
+DECLARE @興櫃最新年度 char(4)
+DECLARE @公發最新年度 char(4)
+
+SELECT @上市最新年度 = MAX(年度) FROM [StockDB].[dbo].[上市櫃基本資料表]
+SELECT @興櫃最新年度 = MAX(年度) FROM [StockDB].[dbo].[興櫃基本資料表]
+SELECT @公發最新年度 = MAX(年度) FROM [StockDB].[dbo].[公開發行基本資料表]
+
+SELECT 股票名稱, 股票代號, 上市上櫃 AS 市場別, 上市上櫃 AS 信評市場別, 公司名稱, 統一編號 FROM [StockDB].[dbo].[上市櫃基本資料表]
+WHERE 年度 LIKE @上市最新年度 AND 掛牌交易中 = 1
+UNION
+SELECT 名稱 AS 股票名稱, 代號 AS 股票代號, 上市上櫃 AS 市場別, 上市上櫃 AS 信評市場別, 公司名稱, 統一編號 FROM [StockDB].[dbo].[興櫃基本資料表]
+WHERE 年度 LIKE @興櫃最新年度 AND 啟用 = 1
+UNION
+SELECT 名稱 AS 股票名稱, 代號 AS 股票代號, 上市上櫃 AS 市場別, 上市上櫃 AS 信評市場別, 公司名稱, 統一編號 FROM [StockDB].[dbo].[公開發行基本資料表]
+WHERE 年度 LIKE @興櫃最新年度 AND 啟用 = 1 AND 代號 NOT LIKE '6536'
+```
+
+
 ## 第四十六題
 找出日收盤內2018年正在掛牌交易中的各檔股票的最大日期資料(使用[日收盤]、在[上市
 櫃基本資料表]中找出該筆資料所符合的年度與股票代號所對應的掛牌交易中)
@@ -615,6 +637,11 @@ JOIN
 [StockDB].[dbo].[日收盤] AS 日收盤
 ON 日收盤.日期 LIKE '20161212' AND 新訓.日期 LIKE '20161212' AND 日收盤.股票代號 = 新訓.股票代號
 WHERE 日收盤.收盤價 != 新訓.收盤價
+```
+
+## 第四十九題
+```SQL
+
 ```
 
 ## 第五十題
