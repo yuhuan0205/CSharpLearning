@@ -173,8 +173,52 @@ CASE
 DESC 
 
 /* 41 */
-SELECT DISTINCT TOP 1000 股票代號 FROM [StockDB].[dbo].[日收盤]
+SELECT * FROM
+(
+	SELECT *, ROW_NUMBER() OVER(PARTITION BY 股票代號 ORDER BY 日期 DESC) AS 筆數 
+	FROM [StockDB].[dbo].[日收盤]
+	WHERE 股票代號 IN (SELECT DISTINCT TOP 1000 股票代號 FROM [StockDB].[dbo].[日收盤])
+) AS 頭1000檔股票
+WHERE 頭1000檔股票.筆數 = 1
 
+
+/* 46 */
+
+SELECT * 
+FROM (
+	SELECT *,  ROW_NUMBER() OVER(PARTITION BY 股票代號 ORDER BY 日期 DESC) AS [Rank] 
+	FROM [StockDB].[dbo].[日收盤] 
+	WHERE 股票代號 IN 
+		(
+		SELECT 股票代號 
+		FROM [StockDB].[dbo].[上市櫃基本資料表] 
+		WHERE 年度 LIKE '2018' AND 掛牌交易中 = 1
+		)
+	AND 日期 LIKE '2018%'
+	) AS 分組
+WHERE 分組.[Rank] = 1
+
+/* 47 */
+SELECT 日借貸前.日期,日借貸今.股票代號, 日借貸前.券商不限用途借貸餘額, 日借貸今.日期, 日借貸今.股票代號, 日借貸今.券商不限用途借貸前日餘額
+FROM [StockDB].[dbo].[日借貸款項擔保品餘額表] AS 日借貸今 JOIN [StockDB].[dbo].[日借貸款項擔保品餘額表] AS 日借貸前 
+ON 日借貸今.股票代號 = 日借貸前.股票代號 AND DATEDIFF(dd, CAST(日借貸前.日期 AS DATE), CAST(日借貸今.日期 AS DATE)) = 1
+WHERE 日借貸今.券商不限用途借貸前日餘額 != 日借貸前.券商不限用途借貸餘額
+
+/* 48 */
+SELECT 新訓.股票代號 , 新訓.收盤價 AS 新訓收盤, 日收盤.股票代號, 日收盤.收盤價 AS 日收盤 FROM 
+(SELECT * FROM [StockDB].[dbo].[日收盤_新人訓練_2016] WHERE 日期 LIKE '20161212' ) AS 新訓
+JOIN 
+(SELECT * FROM [StockDB].[dbo].[日收盤] WHERE 日期 LIKE '20161212' ) AS 日收盤
+ON 日收盤.股票代號 = 新訓.股票代號
+WHERE 日收盤.收盤價 != 新訓.收盤價
+
+/* OR THIS*/
+SELECT 新訓.股票代號 , 新訓.收盤價 AS 新訓收盤, 日收盤.股票代號, 日收盤.收盤價 AS 日收盤 FROM 
+[StockDB].[dbo].[日收盤_新人訓練_2016] AS 新訓
+JOIN 
+[StockDB].[dbo].[日收盤] AS 日收盤
+ON 日收盤.日期 LIKE '20161212' AND 新訓.日期 LIKE '20161212' AND 日收盤.股票代號 = 新訓.股票代號
+WHERE 日收盤.收盤價 != 新訓.收盤價
 
 
 /* 51 */
@@ -216,3 +260,57 @@ GO
 DECLARE @two INT
 EXEC TWORETURN @two OUTPUT
 GO;
+
+
+/* 55 */
+CREATE FUNCTION Get日收盤By日期
+(@日期 nvarchar(8))
+RETURNS TABLE
+
+RETURN (SELECT * FROM [StockDB].[dbo].[日收盤] WHERE 日期 LIKE @日期 )
+
+GO
+
+SELECT * FROM Get日收盤By日期('20181214')
+GO
+
+/* 56 */
+CREATE FUNCTION Get日收盤最大日期
+()
+RETURNS nvarchar(8)
+BEGIN
+DECLARE @最大日期 nvarchar(8)
+ SELECT @最大日期 = MAX(日期) FROM [StockDB].[dbo].[日收盤]
+
+RETURN @最大日期
+END
+
+GO
+SELECT dbo.Get日收盤最大日期()
+
+/* 60 */
+USE StockDB
+GO
+CREATE TRIGGER 日收盤異動
+ON [日收盤]
+AFTER INSERT, UPDATE, DELETE
+AS
+SELECT MTIME = 0
+GO
+
+/* 61 */
+ENABLE TRIGGER 日收盤異動 ON [日收盤]
+GO
+DISABLE TRIGGER 日收盤異動 ON [日收盤]
+GO
+DROP TRIGGER 日收盤異動
+GO
+
+/* 63 */
+WITH 
+TESTCTE AS
+(
+	SELECT * FROM [StockDB].[dbo].[日收盤]
+	WHERE 日期 LIKE '20181214'
+)
+SELECT * FROM TESTCTE
