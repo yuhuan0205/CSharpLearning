@@ -58,18 +58,23 @@ Answer
 ```Sql
 CREATE TABLE [StockDB].[dbo].[日收盤_新人訓練_陳祐桓欄位-型態]
 (
-	[CTIME] datetime,
+	[CTIME] datetime DEFAULT GETDATE(),
 	[MTIME] int,
 	[RecordID] bigint,
 	[日期] nvarchar(8),
-	[股票代碼] nvarchar(10),
+	[股票代號] nvarchar(10),
 	[股票名稱] nvarchar(20),
 	[開盤價] decimal(9,2),
 	[最高價] decimal(9,2),
 	[最低價] decimal(9,2),
 	[收盤價] decimal(9,2),
 	[漲跌] decimal(9,2),
-)
+	PRIMARY KEY(日期 DESC, 股票代號 ASC)
+);
+
+CREATE 
+NONCLUSTERED INDEX MTIME_INDEX
+ON [StockDB].[dbo].[日收盤_新人訓練_陳祐桓欄位-型態](MTIME DESC)
 ```
 `也可以使用 USE StockDB 然後直接 CREATE TABLE [日收盤_新人訓練_陳祐桓欄位-型態]。`
 
@@ -885,12 +890,47 @@ Temp Table的生命週期？
 遇到這樣的狀況，要先開啟執行計畫觀察語句在執行時，是在哪邊有較高的成本。接著再針對該語句進行優化或是建立索引幫助查詢。
 
 ## 第七十題
+請問下列語法的執行順序為何？
 
-* 從 *代號表指數* 透過叢集索引 *代號* 掃描出表中全部的 *代號*。
-* 從 *日收盤* 透過非叢集索引 *日期* 掃描並尋找出 BETWEEN '20170720' AND '20170727' 以及 *股票代號* =  *代號* 的 *日期* 跟 *股票代號* 資料。
-* JOIN 上述兩者的資料，透過 *股票代號* = *代號*。
-* 從 *日收盤* 透過叢集索引 *股票代號* ，尋找前一步得到的ROWS的 *收盤價*
-* JOIN *收盤價*，透過 *股票代號* = *股票代號* 、*日期* = *日期*
-* GROUP BY 以及 彙總
-* HAVING MAX(收盤價) > 100 
-* SELECT
+```SQL
+SELECT DISTINCT
+MIN(日期)
+,股票代號
+,MAX(收盤價)
+FROM 日收盤 AS a
+INNER JOIN 代號表指數 AS i
+ON a.股票代號 = i.代號
+WHERE a.日期 BETWEEN '20170720' AND '20170727'
+GROUP BY a.股票代號
+HAVING MAX(收盤價) > 100
+ORDER BY a.股票代號 DESC
+```
+
+SQL執行順序如下：
+* from 
+* on 
+* join 
+* where 
+* group by
+* avg,sum.... 
+* having 
+* select 
+* distinct 
+* order by
+* limit 
+  
+過程中，每執行一步都會生成一張虛擬表，並作為下個步驟的輸入。
+
+```SQL
+(8)SELECT (9)DISTINCT
+(6)MIN(日期)
+,股票代號
+,(6)MAX(收盤價)
+(1)FROM 日收盤 AS a
+(3)INNER JOIN 代號表指數 AS i
+(2)ON a.股票代號 = i.代號
+(4)WHERE a.日期 BETWEEN '20170720' AND '20170727'
+(5)GROUP BY a.股票代號
+(7)HAVING (6)MAX(收盤價) > 100
+(10)ORDER BY a.股票代號 DESC
+```
