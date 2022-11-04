@@ -1,9 +1,59 @@
 # SQL 練習題目及答案
 
-資料完整性：
+補充知識：
+
+`資料完整性：`
 * 實體完整性：Database會拒絕加入重複的primary key來保證實體完整性。
 * 區域完整性：Database會拒絕加入資料類型超出預設範圍的資料，來確保區域完整性。
 * 參考完整性：若 TableA 的 foreign key 指向的 TableB 的 primary key 將被刪除，Database會拒絕操作以確保參考完整性。
+
+`在SQL server中，若一表未建立叢集索引，資料表則會以Heap Table(查詢時無序)的方式建立，好處是新增資料時因不必考慮排序，可以有更快的速度。`
+
+
+`資料庫儲存資料的最小單位為資料頁－－page，`
+
+每個資料頁大小約為8Kbytes，開頭96bytes，都是存放metadata。
+
+資料頁分成以下幾種類型：
+* 資料頁：存放資料列的頁面(除特定資料類型 text, image...等)
+* 索引頁：存放指向資料頁索引的頁面
+* 文字/影像頁：存放 text, image等特殊資料型態
+* 系統相關資料頁：存放跟資料表相關的資訊。
+
+`B Tree 與 B+ Tree 的差別`
+
+```
+B Tree 是一個 Balenced m Tree，意即 *會自動平衡的m階樹狀結構*
+每個節點會有資料與指標，指標會指向子節點，而子節點的資料會介於父節點的指標前後的資料範圍。
+一個節點最多只向M個節點，當指向的節點超過M時，會拆分父節點重新定位子節點。
+
+B+Tree 也是一個 Balenced m Tree，只是在針對資料庫邏輯與硬碟的物理限制上做了優化。
+與B Tree類似，但B+Tree的資料都只存放在葉節點，非葉節點都存放指標，由於指標不大，相較於同時存放資料
+的B Tree，B+ Tree可以存放更多指標在一個節點中，指標的順序即是葉節點的順序，也就是資料的順序。
+而葉節點還存了左右葉節點的指標，使得整體存取效率更高。而這樣的結構也使整顆B+Tree的樹高落在 1-3之間。
+不會有B Tree 在資料量大的時候會有深度過深的問題。
+```
+
+`索引破碎`
+* 外部破碎－ 指當同一index下存放的資料頁滿時，系統在開新的資料頁裝資料，造成同一索引下資料不連續的問題。
+* 內部破碎－ 指當同一index下的資料頁中，有資料修改或刪除時，導致資料列之間有多餘的空間。
+
+此時就該進行索引重組或重建。
+
+`VIEW 修改的情況`
+* VIEW可以做CRUD。
+* VIEW不能新增資料的特殊情況是，當VIEW只指定了部分欄位，新增資料時沒辦法在VIEW上指定其對應的資料表上的所有NOT NULL欄位，因而造成無法新增資料的情況。
+
+`LIKE 與 = 的差異`
+* LIKE 可以使用萬用字元來進行比對，= 則否。
+* 當LIKE使用萬用字元進行查找時，其搜尋模式會根據其模式而有差別。如 
+  在有索引的欄位以條件 LIKE'%abc%'會進行全表掃描；'abc%'會先到 'abc'的位置在進行掃描。
+  而 = 是精確搜索，用Seek的方式而不是採全表掃描。
+
+`CAST 與 CONVERT 的差異`
+* CAST 為 SQL明確制定的轉型方法，所有DBMS都有，CONVERT則不是每個DBMS都有提供。
+* MSSQL 提供CONVERT方法作為轉型，比起CAST多了一個STYLE參數，但在不加STYLE參數的情況下使用上與CAST無異
+* STYLE 參數提供了日期、時間、數字的格式化處理。
 
 語法：
 ```SQL
@@ -403,6 +453,12 @@ WHERE 日期 LIKE '2018%' AND 股票名稱 LIKE '%指數%'
 /* 用日期轉型 */
 SELECT * from [StockDB].[DBO].[日收盤] 
 WHERE DATEDIFF(dd, CAST(日期 AS DATE), GETDATE()) = 0
+
+/* 日期轉型字串 */
+/* https://kknews.cc/zh-tw/code/ga46yp8.html */
+DECLARE @TODAY NVARCHAR(8) = CONVERT(NVARCHAR(8), GETDATE(), 112)
+SELECT * from [StockDB].[DBO].[日收盤] 
+WHERE 日期 LIKE @TODAY
 
 /* 本日 */
 SELECT * from [StockDB].[DBO].[日收盤] 
