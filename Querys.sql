@@ -253,6 +253,7 @@ FROM (
 	) AS 分組
 WHERE 分組.[Rank] = 1
 
+/* SOLUTION2 */
 
 SELECT * FROM [StockDB].[dbo].[日收盤] AS 股票資料
 INNER JOIN
@@ -292,6 +293,50 @@ JOIN
 [StockDB].[dbo].[日收盤] AS 日收盤
 ON 日收盤.日期 LIKE N'20161212' AND 新訓.日期 LIKE N'20161212' AND 日收盤.股票代號 = 新訓.股票代號
 WHERE 日收盤.收盤價 != 新訓.收盤價
+
+/* 49 */
+/* ANS SHOULD BE 14896 */
+
+WITH 
+公司最大年度 AS(
+SELECT 港股.年度, 港股.公司統一編號, MAX(SHGSTUDTLCOM.最大CHADATE) AS 最大CHADATE
+FROM
+[StockDB].[dbo].[港股上市公司基本資料表] AS 港股
+JOIN
+(SELECT ROW_NUMBER() OVER(PARTITION BY HK.COMUNIC ORDER BY 最大日期.最大CHADATE DESC) AS [日期RANK], HK.COMUNIC, 最大日期.最大CHADATE, HK.NUMPUSH 
+FROM
+(SELECT *, ROW_NUMBER() OVER(PARTITION BY COMUNIC, SUBSTRING(CONVERT(nvarchar, CHDATE, 112),0, 5) ORDER BY COMUNIC, CHDATE DESC)AS [日期RANK] FROM [New_HK_DB].[dbo].[HK_SHGSTUDTLCOM] WHERE [REFCSHGTY] = 1 AND [AREAREFCSHG] = 1 AND [NUMPUSH] > 0 AND [ISVALID] = 1)AS HK
+JOIN 
+(SELECT COMUNIC, MAX(CHDATE) AS 最大CHADATE 
+FROM [New_HK_DB].[dbo].[HK_SHGSTUDTLCOM]
+GROUP BY COMUNIC, SUBSTRING(CONVERT(nvarchar, CHDATE, 112),0, 5)) AS 最大日期
+ON HK.COMUNIC = 最大日期.COMUNIC AND HK.CHDATE = 最大日期.最大CHADATE AND HK.[日期RANK] = 1 ) AS SHGSTUDTLCOM
+ON 港股.公司統一編號 = SHGSTUDTLCOM.COMUNIC AND 港股.年度 >= SUBSTRING(CONVERT(nvarchar, SHGSTUDTLCOM.最大CHADATE, 112),0, 5)
+GROUP BY 港股.公司統一編號, 港股.年度
+)
+
+
+UPDATE [StockDB].[dbo].[港股上市公司基本資料表]
+SET [StockDB].[dbo].[港股上市公司基本資料表].[普通股發行股數(百萬股)] = CAST(年度對應.NUMPUSH/1000000 AS DECIMAL(10,3))
+FROM 
+(SELECT 公司最大年度.最大CHADATE, 公司最大年度.公司統一編號, 公司最大年度.年度, 港股.[普通股發行股數(百萬股)], HK.NUMPUSH FROM 
+公司最大年度
+JOIN
+[StockDB].[dbo].[港股上市公司基本資料表] AS 港股
+ON 公司最大年度.年度 = 港股.年度 AND 公司最大年度.公司統一編號 = 港股.公司統一編號
+JOIN 
+((SELECT *, ROW_NUMBER() OVER(PARTITION BY COMUNIC, SUBSTRING(CONVERT(nvarchar, CHDATE, 112),0, 5) ORDER BY COMUNIC, CHDATE DESC)AS [日期RANK] FROM [New_HK_DB].[dbo].[HK_SHGSTUDTLCOM])AS HK
+JOIN 
+(SELECT COMUNIC, MAX(CHDATE) AS 最大CHADATE 
+FROM [New_HK_DB].[dbo].[HK_SHGSTUDTLCOM]
+GROUP BY COMUNIC, SUBSTRING(CONVERT(nvarchar, CHDATE, 112),0, 5)) AS 最大日期
+ON HK.COMUNIC = 最大日期.COMUNIC AND HK.CHDATE = 最大日期.最大CHADATE AND HK.[日期RANK] = 1)
+ON 公司最大年度.最大CHADATE = HK.CHDATE AND 公司最大年度.公司統一編號 = HK.COMUNIC) AS 年度對應
+
+WHERE [StockDB].[dbo].[港股上市公司基本資料表].公司統一編號 = 年度對應.公司統一編號 
+
+
+
 
 
 /* 51 */
@@ -387,7 +432,6 @@ TESTCTE AS
 	WHERE 日期 LIKE N'20181214'
 )
 SELECT * FROM TESTCTE
-
 
 
 
