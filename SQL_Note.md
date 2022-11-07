@@ -55,6 +55,10 @@ B+Tree 也是一個 Balenced m Tree，只是在針對資料庫邏輯與硬碟的
 * MSSQL 提供CONVERT方法作為轉型，比起CAST多了一個STYLE參數，但在不加STYLE參數的情況下使用上與CAST無異
 * STYLE 參數提供了日期、時間、數字的格式化處理。
 
+`CTE 與 TEMP 的比較`
+* TEMP TABLE 在創建時需要宣告表的結構。
+* CTE 創建只需要設陳述式而不需要事先宣告表結構便能建立一張表。
+* CTE 支援遞迴查詢。
 語法：
 ```SQL
 /* 可以複製表結構到新表 */
@@ -270,8 +274,8 @@ VIEW 檢視表 － 是一個將查詢敘述簡化的資料呈現方式，可以�
 ## 第十二題
 請使用語法新增一筆資料到第一題所建立的表中
 ```SQL
-INSERT INTO [StockDB].[dbo].[日收盤_新人訓練_陳祐桓欄位-型態](日期, 股票代碼, 股票名稱, 開盤價)
- VALUES('20181218', '0000', '測試', 0);
+INSERT INTO [StockDB].[dbo].[日收盤_新人訓練_陳祐桓欄位-型態](日期, 股票代號, 股票名稱, 開盤價)
+ VALUES(N'20181218', N'0000', N'測試', 0);
 ```
 
 ## 第十三題
@@ -279,7 +283,7 @@ INSERT INTO [StockDB].[dbo].[日收盤_新人訓練_陳祐桓欄位-型態](日�
 ```SQL
 UPDATE [StockDB].[dbo].[日收盤_新人訓練_陳祐桓欄位-型態]
 SET 開盤價 = 1
-WHERE 股票名稱 LIKE '測試';
+WHERE 股票名稱 LIKE N'測試';
 /*補充：SET的WHERE也可以比對多個資料表*/
 UPDATE TABLE_A
 SET ...
@@ -345,7 +349,7 @@ DROP TABLE TABLE_A;
 找出日期為 20181206的所有資料
 ```SQL
 SELECT * FROM [StockDB].[dbo].[日收盤]
-WHERE [日期] LIKE '20181206';
+WHERE [日期] LIKE N'20181206';
 ```
 
 ## 第二十題
@@ -353,14 +357,14 @@ WHERE [日期] LIKE '20181206';
 日期在20181201到20181206的所有資料
 ```SQL
 SELECT * FROM [StockDB].[dbo].[日收盤]
-WHERE (日期 BETWEEN '20181201' AND '20181206') AND 股票代號 IN ('0050', '006201', '00721B');
+WHERE (日期 BETWEEN N'20181201' AND N'20181206') AND 股票代號 IN (N'0050', N'006201', N'00721B');
 ```
 
 ## 第二十一題
 所有20181201到20181206中不相同的股票代號
 ```SQL
 SELECT DISTINCT 股票代號 FROM [StockDB].[dbo].[日收盤]
-WHERE (日期 BETWEEN '20181201' AND '20181206');
+WHERE (日期 BETWEEN N'20181201' AND N'20181206');
 ```
 
 ## 第二十二題
@@ -368,14 +372,14 @@ WHERE (日期 BETWEEN '20181201' AND '20181206');
 ```SQL
 SELECT 日期, COUNT(*) AS 資料筆數 FROM [StockDB].[dbo].[日收盤]
 GROUP BY 日期
-HAVING 日期 LIKE '2018%'
+HAVING 日期 LIKE N'2018%'
 ```
 
 ## 第二十三題
 每檔股票在20181201到20181206的開盤價總和、最小最高價、最大最低價、平均收盤價
 ```SQL
 SELECT 股票代號, SUM(開盤價) AS 開盤價總和, MIN(最高價) AS 最小最高價, MAX(最低價) AS 最大最低價, AVG(收盤價) AS 平均收盤價 FROM [StockDB].[dbo].[日收盤]
-WHERE 日期 BETWEEN '20181201' AND '20181206'
+WHERE 日期 BETWEEN N'20181201' AND N'20181206'
 GROUP BY 股票代號;
 ```
 
@@ -383,29 +387,29 @@ GROUP BY 股票代號;
 所有在20181201到20181206 不相同股票名稱的前兩個字
 ```SQL
 SELECT DISTINCT 股票名稱, SUBSTRING(股票名稱,0,3) AS 縮寫 FROM [StockDB].[dbo].[日收盤]
-WHERE 日期 BETWEEN '20181201' AND '20181206'
+WHERE 日期 BETWEEN N'20181201' AND N'20181206'
 ```
 
 ## 第二十五題
 所有在20181201到20181206的不相同股票名稱且頭尾要去空白
 ```SQL
 SELECT DISTINCT RTRIM (LTRIM(股票名稱)) AS 頭尾去空白 FROM [StockDB].[dbo].[日收盤]
-WHERE 日期 BETWEEN '20181201' AND '20181206'
+WHERE 日期 BETWEEN N'20181201' AND N'20181206'
 ```
 
 ## 第二十六題
 20181201到20181206的所有股票，先依照股票代號由大到小排序，再依照日期由小到大排序
 ```SQL
 SELECT * FROM [StockDB].[dbo].[日收盤]
-WHERE 日期 BETWEEN '20181201' AND '20181206'
-ORDER BY 股票代號 DESC, CTIME ASC
+WHERE 日期 BETWEEN N'20181201' AND N'20181206'
+ORDER BY 股票代號 DESC, 日期 ASC
 ```
 
 ## 第二十七題
 20181201到20181206所有平均收盤價低於80的股票代號
 ```SQL
 SELECT 股票代號, AVG(收盤價) AS 平均收盤價 FROM [StockDB].[dbo].[日收盤]
-WHERE 日期 BETWEEN '20181201' AND '20181206'
+WHERE 日期 BETWEEN N'20181201' AND N'20181206'
 GROUP BY 股票代號
 HAVING AVG(收盤價) < 80
 ```
@@ -414,7 +418,7 @@ HAVING AVG(收盤價) < 80
 2018年總資料筆數
 ```SQL
 SELECT COUNT(*) AS 總資料筆數 FROM [StockDB].[dbo].[日收盤]
-WHERE 日期 LIKE '2018%'
+WHERE 日期 LIKE N'2018%'
 ```
 
 ## 第二十九題
@@ -422,29 +426,33 @@ WHERE 日期 LIKE '2018%'
 ```SQL
 SELECT COUNT(*) AS 總資料筆數
 FROM ( (SELECT 股票代號, 日期 FROM [StockDB].[dbo].[日收盤]
-WHERE 日期 LIKE '2018%' )
+WHERE 日期 LIKE N'2018%' )
 EXCEPT
 (SELECT 股票代號, 日期 FROM [StockDB].[dbo].[日收盤]
-WHERE 日期 LIKE '2018%' AND 收盤價 IS NULL
+WHERE 日期 LIKE N'2018%' AND 收盤價 IS NULL
 )) AS 非空收盤價
 
 SELECT COUNT(*) AS 總資料筆數
 FROM [StockDB].[dbo].[日收盤]
-WHERE 日期 LIKE '2018%' AND (收盤價 >=0 OR 收盤價 < 0)
+WHERE 日期 LIKE N'2018%' AND (收盤價 >=0 OR 收盤價 < 0)
+
+SELECT COUNT(收盤價) AS 總資料筆數
+FROM [StockDB].[dbo].[日收盤]
+WHERE 日期 LIKE N'2018%'
 ```
 
 ## 第三十題
 2018年股票代號長度大於4的所有不相同股票代號
 ```SQL
 SELECT DISTINCT 股票代號 FROM [StockDB].[dbo].[日收盤]
-WHERE 日期 LIKE '2018%' AND LEN(股票代號) > 4
+WHERE 日期 LIKE N'2018%' AND LEN(股票代號) > 4
 ```
 
 ## 第三十一題
 2018年包含"指數"且不相同的股票名稱，在顯示股票名稱時把"指數"換成"__"
 ```SQL
-SELECT DISTINCT REPLACE(股票名稱, '指數', '__') AS 名稱包含指數之股票 FROM [StockDB].[dbo].[日收盤]
-WHERE 日期 LIKE '2018%' AND 股票名稱 LIKE '%指數%'
+SELECT DISTINCT REPLACE(股票名稱, N'指數', N'__') AS 名稱包含指數之股票 FROM [StockDB].[dbo].[日收盤]
+WHERE 日期 LIKE N'2018%' AND 股票名稱 LIKE N'%指數%'
 ```
 
 ## 第三十二題
@@ -476,7 +484,7 @@ WHERE DATEDIFF(MM, CTIME, GETDATE()) = 0
 ## 第三十三題
 找到2018年所有股票代號1開頭的股票各自的第6個交易日資料
 ```SQL
-SELECT * FROM (SELECT *,  ROW_NUMBER() OVER(PARTITION BY 股票代號 ORDER BY 日期) AS [Rank] FROM [StockDB].[dbo].[日收盤] WHERE 股票代號 LIKE '1%' AND 日期 LIKE '2018%') AS 分組
+SELECT * FROM (SELECT *,  ROW_NUMBER() OVER(PARTITION BY 股票代號 ORDER BY 日期) AS [Rank] FROM [StockDB].[dbo].[日收盤] WHERE 股票代號 LIKE N'1%' AND 日期 LIKE N'2018%') AS 分組
 WHERE 分組.[Rank] = 6
 ```
 
@@ -484,20 +492,20 @@ WHERE 分組.[Rank] = 6
 20181206有但20181205沒有的股票代號
 ```SQL
 SELECT DISTINCT 股票代號 FROM [StockDB].[dbo].[日收盤]
-WHERE [日期] LIKE '20181206'
+WHERE [日期] LIKE N'20181206'
 EXCEPT
 SELECT DISTINCT 股票代號 FROM [StockDB].[dbo].[日收盤]
-WHERE [日期] LIKE '20181205'
+WHERE [日期] LIKE N'20181205'
 ```
 
 ## 第三十五題
 20181206有但20181205也有的股票代號
 ```SQL
 SELECT DISTINCT 股票代號 FROM [StockDB].[dbo].[日收盤]
-WHERE [日期] LIKE '20181206'
+WHERE [日期] LIKE N'20181206'
 INTERSECT 
 SELECT DISTINCT 股票代號 FROM [StockDB].[dbo].[日收盤]
-WHERE [日期] LIKE '20181205'
+WHERE [日期] LIKE N'20181205'
 ```
 
 ## 第三十六題
@@ -505,17 +513,18 @@ WHERE [日期] LIKE '20181205'
 ```SQL
 SELECT 日收盤.* , 上市櫃.英文名稱  
 FROM [StockDB].[dbo].[日收盤] AS 日收盤 JOIN [StockDB].[dbo].[上市櫃基本資料表] AS 上市櫃 ON 日收盤.股票代號 = 上市櫃.股票代號 AND SUBSTRING(日收盤.日期, 0, 5) LIKE  上市櫃.年度
-WHERE 日收盤.日期 LIKE '2018%'
+WHERE 日收盤.日期 LIKE N'2018%'
 ```
 
 ## 第三十七題
 [ETF基本資料表]中2018年的資料，以及該ETF在20181214的[日收盤]資料，且[ETF基本資料表]的[名稱]與[日收盤]的[股票名稱]不同，顯示[ETF基本資料表]的[年度][名稱]，以及[日收盤]的[日期][股票名稱]。
 ```SQL
 SELECT 日收盤.日期, 日收盤.股票名稱, ETF.年度, ETF.名稱 
-FROM (SELECT * FROM [StockDB].[dbo].[日收盤] WHERE 日期 LIKE '20181214' ) AS 日收盤 
+FROM (SELECT * FROM [StockDB].[dbo].[日收盤] WHERE 日期 LIKE N'20181214' ) AS 日收盤 
 JOIN 
-(SELECT 年度, 名稱, 代號 FROM [StockDB].[dbo].[ETF基本資料表] WHERE 年度 LIKE '2018') AS ETF
-ON 日收盤.股票代號 = ETF.代號 AND SUBSTRING(日收盤.日期, 0, 5) LIKE  ETF.年度
+(SELECT 年度, 名稱, 代號 FROM [StockDB].[dbo].[ETF基本資料表] WHERE 年度 LIKE N'2018') AS ETF
+ON 日收盤.股票代號 = ETF.代號
+WHERE 日收盤.股票名稱 NOT LIKE ETF.名稱
 ```
 
 ## 第三十八題
@@ -523,15 +532,15 @@ ON 日收盤.股票代號 = ETF.代號 AND SUBSTRING(日收盤.日期, 0, 5) LIK
 ```SQL
 SELECT 上市櫃 = 
 CASE 上市櫃
-	WHEN 1 THEN '上市'
-	WHEN 2 THEN '上櫃'
-	WHEN 3 THEN '興櫃'
-	WHEN 4 THEN '公發'
-	ELSE '其他'
+	WHEN 1 THEN N'上市'
+	WHEN 2 THEN N'上櫃'
+	WHEN 3 THEN N'興櫃'
+	WHEN 4 THEN N'公發'
+	ELSE N'其他'
 END,
 [CTIME], [MTIME], [RecordID], [日期], [股票代號], [股票名稱], [參考價], [開盤價], [最高價], [最低價], [收盤價], [漲跌], [產業代號], [漲停價], [跌停價], [漲跌狀況], [最後委買價], [最後委賣價], [漲幅(%)], [振幅(%)], [成交量], [成交量(股)], [成交筆數], [成交金額(千)], [成交值比重(%)], [成交量變動(%)], [股本(百萬)2], [均張變動(%)], [均張], [總市值(億)], [市值比重(%)], [類股本益比], [類股股價淨值比], [類股股價淨值比2], [本益比], [本益比(近四季)], [股東權益(百萬)], [股價淨值比], [股價淨值比2], [舊股本(百萬)], [委買張數], [委賣張數], [次日參考價], [成交金額_元], [均價], [股本(百萬)], [週轉率], [漲跌停]
 FROM [StockDB].[dbo].[日收盤] AS 日收盤
-WHERE 日期 BETWEEN '20181201' AND '20181206'
+WHERE 日期 BETWEEN N'20181201' AND N'20181206'
 ```
 
 ## 第三十九題
@@ -544,20 +553,20 @@ WHERE 日期 BETWEEN '20181201' AND '20181206'
 ```SQL
 SELECT [Range] = 
 CASE 
-	WHEN 收盤價<10 THEN 'Under_10'
-	WHEN 收盤價 >= 10 AND 收盤價 < 50 THEN 'Under_50'
-	WHEN 收盤價 >= 50 AND 收盤價 < 100 THEN 'Under_100'
-	WHEN 收盤價>=100 THEN 'Over_100'
+	WHEN 收盤價<10 THEN N'Under_10'
+	WHEN 收盤價 >= 10 AND 收盤價 < 50 THEN N'Under_50'
+	WHEN 收盤價 >= 50 AND 收盤價 < 100 THEN N'Under_100'
+	WHEN 收盤價>=100 THEN N'Over_100'
 END, *
 FROM [StockDB].[dbo].[日收盤] AS 日收盤
-WHERE 日期 BETWEEN '20181201' AND '20181206'
+WHERE 日期 BETWEEN N'20181201' AND N'20181206'
 ```
 
 ## 第四十題
 20181206的所有股票資料，並以收盤價>5遞減、收盤價<=5遞增排序
 ```SQL
 SELECT * FROM [StockDB].[dbo].[日收盤]
-WHERE 日期 LIKE '20181206'
+WHERE 日期 LIKE N'20181206'
 ORDER BY 
 CASE
 	WHEN 收盤價 > 5 THEN 收盤價
@@ -656,7 +665,7 @@ SELECT 名稱 AS 股票名稱, 代號 AS 股票代號, 上市上櫃 AS 市場別
 WHERE 年度 LIKE @興櫃最新年度 AND 啟用 = 1
 UNION
 SELECT 名稱 AS 股票名稱, 代號 AS 股票代號, 上市上櫃 AS 市場別, 上市上櫃 AS 信評市場別, 公司名稱, 統一編號 FROM [StockDB].[dbo].[公開發行基本資料表]
-WHERE 年度 LIKE @興櫃最新年度 AND 啟用 = 1 AND 代號 NOT LIKE '6536'
+WHERE 年度 LIKE @公發最新年度 AND 啟用 = 1 AND 代號 NOT LIKE N'6536'
 ```
 
 
@@ -677,15 +686,33 @@ FROM (
 	AND 日期 LIKE '2018%'
 	) AS 分組
 WHERE 分組.[Rank] = 1
+
+/* SOLUTION2 */
+
+SELECT * FROM [StockDB].[dbo].[日收盤] AS 股票資料
+INNER JOIN
+(SELECT 股票代號, MAX(日期) AS 最大日期
+FROM [StockDB].[dbo].[日收盤] 
+GROUP BY 股票代號)
+AS 股票日期
+ON 股票日期.最大日期 = 股票資料.日期 AND 股票日期.股票代號 = 股票資料.股票代號
+WHERE 股票資料.股票代號 IN 
+	(
+	SELECT 股票代號 
+	FROM [StockDB].[dbo].[上市櫃基本資料表] 
+	WHERE 年度 LIKE N'2018' AND 掛牌交易中 = 1
+	)
 ```
 
 ## 第四十七題
 請找出[日借貸款項擔保品餘額表]中，[券商不限用途借貸前日餘額]不等於[券商不限用途借貸餘額]的資料
 ```SQL
 SELECT 日借貸前.日期,日借貸今.股票代號, 日借貸前.券商不限用途借貸餘額, 日借貸今.日期, 日借貸今.股票代號, 日借貸今.券商不限用途借貸前日餘額
-FROM [StockDB].[dbo].[日借貸款項擔保品餘額表] AS 日借貸今 \
-JOIN [StockDB].[dbo].[日借貸款項擔保品餘額表] AS 日借貸前 
-ON 日借貸今.股票代號 = 日借貸前.股票代號 AND DATEDIFF(dd, CAST(日借貸前.日期 AS DATE), CAST(日借貸今.日期 AS DATE)) = 1
+FROM 
+(SELECT ROW_NUMBER() OVER(PARTITION BY 股票代號 ORDER BY 日期 DESC) AS [日期RANK], * FROM [StockDB].[dbo].[日借貸款項擔保品餘額表]) AS 日借貸今 
+JOIN 
+(SELECT ROW_NUMBER() OVER(PARTITION BY 股票代號 ORDER BY 日期 DESC) AS [日期RANK], * FROM [StockDB].[dbo].[日借貸款項擔保品餘額表]) AS 日借貸前 
+ON 日借貸今.股票代號 = 日借貸前.股票代號 AND 日借貸今.日期RANK = 日借貸前.日期RANK-1
 WHERE 日借貸今.券商不限用途借貸前日餘額 != 日借貸前.券商不限用途借貸餘額
 ```
 
@@ -693,16 +720,60 @@ WHERE 日借貸今.券商不限用途借貸前日餘額 != 日借貸前.券商�
 找出20161212所有[日收盤_新人訓練_2016]的收盤價不等於[日收盤]的收盤價的資料
 ```SQL
 SELECT 新訓.股票代號 , 新訓.收盤價 AS 新訓收盤, 日收盤.股票代號, 日收盤.收盤價 AS 日收盤 FROM 
+(SELECT * FROM [StockDB].[dbo].[日收盤_新人訓練_2016] WHERE 日期 LIKE N'20161212' ) AS 新訓
+JOIN 
+(SELECT * FROM [StockDB].[dbo].[日收盤] WHERE 日期 LIKE N'20161212' ) AS 日收盤
+ON 日收盤.股票代號 = 新訓.股票代號
+WHERE 日收盤.收盤價 != 新訓.收盤價
+
+/* SOLUTION2 */
+SELECT 新訓.股票代號 , 新訓.收盤價 AS 新訓收盤, 日收盤.股票代號, 日收盤.收盤價 AS 日收盤 FROM 
 [StockDB].[dbo].[日收盤_新人訓練_2016] AS 新訓
 JOIN 
 [StockDB].[dbo].[日收盤] AS 日收盤
-ON 日收盤.日期 LIKE '20161212' AND 新訓.日期 LIKE '20161212' AND 日收盤.股票代號 = 新訓.股票代號
+ON 日收盤.日期 LIKE N'20161212' AND 新訓.日期 LIKE N'20161212' AND 日收盤.股票代號 = 新訓.股票代號
 WHERE 日收盤.收盤價 != 新訓.收盤價
 ```
 
 ## 第四十九題
 ```SQL
+WITH 
+公司最大年度 AS(
+SELECT 港股.年度, 港股.公司統一編號, MAX(SHGSTUDTLCOM.最大CHADATE) AS 最大CHADATE
+FROM
+[StockDB].[dbo].[港股上市公司基本資料表] AS 港股
+JOIN
+(SELECT ROW_NUMBER() OVER(PARTITION BY HK.COMUNIC ORDER BY 最大日期.最大CHADATE DESC) AS [日期RANK], HK.COMUNIC, 最大日期.最大CHADATE, HK.NUMPUSH 
+FROM
+(SELECT *, ROW_NUMBER() OVER(PARTITION BY COMUNIC, SUBSTRING(CONVERT(nvarchar, CHDATE, 112),0, 5) ORDER BY COMUNIC, CHDATE DESC)AS [日期RANK] FROM [New_HK_DB].[dbo].[HK_SHGSTUDTLCOM] WHERE [REFCSHGTY] = 1 AND [AREAREFCSHG] = 1 AND [NUMPUSH] > 0 AND [ISVALID] = 1)AS HK
+JOIN 
+(SELECT COMUNIC, MAX(CHDATE) AS 最大CHADATE 
+FROM [New_HK_DB].[dbo].[HK_SHGSTUDTLCOM]
+GROUP BY COMUNIC, SUBSTRING(CONVERT(nvarchar, CHDATE, 112),0, 5)) AS 最大日期
+ON HK.COMUNIC = 最大日期.COMUNIC AND HK.CHDATE = 最大日期.最大CHADATE AND HK.[日期RANK] = 1 ) AS SHGSTUDTLCOM
+ON 港股.公司統一編號 = SHGSTUDTLCOM.COMUNIC AND 港股.年度 >= SUBSTRING(CONVERT(nvarchar, SHGSTUDTLCOM.最大CHADATE, 112),0, 5)
+GROUP BY 港股.公司統一編號, 港股.年度
+)
 
+
+UPDATE [StockDB].[dbo].[港股上市公司基本資料表]
+SET [StockDB].[dbo].[港股上市公司基本資料表].[普通股發行股數(百萬股)] = CAST(年度對應.NUMPUSH/1000000 AS DECIMAL(10,3))
+FROM 
+(SELECT 公司最大年度.最大CHADATE, 公司最大年度.公司統一編號, 公司最大年度.年度, 港股.[普通股發行股數(百萬股)], HK.NUMPUSH FROM 
+公司最大年度
+JOIN
+[StockDB].[dbo].[港股上市公司基本資料表] AS 港股
+ON 公司最大年度.年度 = 港股.年度 AND 公司最大年度.公司統一編號 = 港股.公司統一編號
+JOIN 
+((SELECT *, ROW_NUMBER() OVER(PARTITION BY COMUNIC, SUBSTRING(CONVERT(nvarchar, CHDATE, 112),0, 5) ORDER BY COMUNIC, CHDATE DESC)AS [日期RANK] FROM [New_HK_DB].[dbo].[HK_SHGSTUDTLCOM])AS HK
+JOIN 
+(SELECT COMUNIC, MAX(CHDATE) AS 最大CHADATE 
+FROM [New_HK_DB].[dbo].[HK_SHGSTUDTLCOM]
+GROUP BY COMUNIC, SUBSTRING(CONVERT(nvarchar, CHDATE, 112),0, 5)) AS 最大日期
+ON HK.COMUNIC = 最大日期.COMUNIC AND HK.CHDATE = 最大日期.最大CHADATE AND HK.[日期RANK] = 1)
+ON 公司最大年度.最大CHADATE = HK.CHDATE AND 公司最大年度.公司統一編號 = HK.COMUNIC) AS 年度對應
+
+WHERE [StockDB].[dbo].[港股上市公司基本資料表].公司統一編號 = 年度對應.公司統一編號 
 ```
 
 ## 第五十題
@@ -776,7 +847,7 @@ RETURN (SELECT * FROM [StockDB].[dbo].[日收盤] WHERE 日期 LIKE @日期 )
 
 GO
 
-SELECT * FROM Get日收盤By日期('20181214')
+SELECT * FROM Get日收盤By日期(N'20181214')
 ```
 
 ## 第五十六題
@@ -876,7 +947,7 @@ WITH
 TESTCTE AS
 (
 	SELECT * FROM [StockDB].[dbo].[日收盤]
-	WHERE 日期 LIKE '20181214'
+	WHERE 日期 LIKE N'20181214'
 )
 SELECT * FROM TESTCTE
 ```
@@ -895,13 +966,13 @@ Temporary table分成三種
 ```SQL
 USE StockDB;
 /* 區域暫存表 */
-SELECT * INTO [#tempTable] FROM [日收盤] WHERE [日期] LIKE '20181214';
+SELECT * INTO [#tempTable] FROM [日收盤] WHERE [日期] LIKE N'20181214';
 
 /* 全域暫存表 */
-SELECT * INTO [##tempTable] FROM [日收盤] WHERE [日期] LIKE '20181214';
+SELECT * INTO [##tempTable] FROM [日收盤] WHERE [日期] LIKE N'20181214';
 
 /* 資料表變數 */
-SELECT * INTO [@tempTable] FROM [日收盤] WHERE [日期] LIKE '20181214';
+SELECT * INTO [@tempTable] FROM [日收盤] WHERE [日期] LIKE N'20181214';
 ```
 
 ## 第六十六題
