@@ -1,0 +1,16 @@
+D:\github\CSharpLearning\LinqPractice\LinqPractice\bin\Debug\LinqPractice.exe.config
+D:\github\CSharpLearning\LinqPractice\LinqPractice\bin\Debug\LinqPractice.exe
+D:\github\CSharpLearning\LinqPractice\LinqPractice\bin\Debug\LinqPractice.pdb
+D:\github\CSharpLearning\LinqPractice\LinqPractice\bin\Debug\EntityFramework.dll
+D:\github\CSharpLearning\LinqPractice\LinqPractice\bin\Debug\EntityFramework.SqlServer.dll
+D:\github\CSharpLearning\LinqPractice\LinqPractice\bin\Debug\EntityFramework.xml
+D:\github\CSharpLearning\LinqPractice\LinqPractice\bin\Debug\EntityFramework.SqlServer.xml
+D:\github\CSharpLearning\LinqPractice\LinqPractice\bin\Debug\zh-Hant\EntityFramework.resources.dll
+D:\github\CSharpLearning\LinqPractice\LinqPractice\obj\Debug\LinqPractice.csproj.AssemblyReference.cache
+D:\github\CSharpLearning\LinqPractice\LinqPractice\obj\Debug\LinqPractice.Form1.resources
+D:\github\CSharpLearning\LinqPractice\LinqPractice\obj\Debug\LinqPractice.Properties.Resources.resources
+D:\github\CSharpLearning\LinqPractice\LinqPractice\obj\Debug\LinqPractice.csproj.GenerateResource.cache
+D:\github\CSharpLearning\LinqPractice\LinqPractice\obj\Debug\LinqPractice.csproj.CoreCompileInputs.cache
+D:\github\CSharpLearning\LinqPractice\LinqPractice\obj\Debug\LinqPractice.csproj.CopyComplete
+D:\github\CSharpLearning\LinqPractice\LinqPractice\obj\Debug\LinqPractice.exe
+D:\github\CSharpLearning\LinqPractice\LinqPractice\obj\Debug\LinqPractice.pdb
