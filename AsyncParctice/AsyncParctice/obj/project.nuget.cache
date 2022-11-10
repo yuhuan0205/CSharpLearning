@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "+Km4aoOVXqS3lKuxtHl8j/d/SzxZ4GgKq4QW8EPHZc24HrdF552YNxjoZ6BrP/cv9YaisnbsdcKzra8DgYsalA==",
+  "success": true,
+  "projectFilePath": "D:\\github\\CSharpLearning\\AsyncParctice\\AsyncParctice\\AsyncParctice.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\user1\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512"
+  ],
+  "logs": []
+}

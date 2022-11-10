@@ -1,0 +1,10 @@
+D:\github\CSharpLearning\AsyncParctice\AsyncParctice\bin\Debug\netcoreapp3.1\AsyncParctice.deps.json
+D:\github\CSharpLearning\AsyncParctice\AsyncParctice\bin\Debug\netcoreapp3.1\AsyncParctice.dll
+D:\github\CSharpLearning\AsyncParctice\AsyncParctice\bin\Debug\netcoreapp3.1\AsyncParctice.pdb
+D:\github\CSharpLearning\AsyncParctice\AsyncParctice\obj\Debug\netcoreapp3.1\AsyncParctice.csproj.AssemblyReference.cache
+D:\github\CSharpLearning\AsyncParctice\AsyncParctice\obj\Debug\netcoreapp3.1\AsyncParctice.GeneratedMSBuildEditorConfig.editorconfig
+D:\github\CSharpLearning\AsyncParctice\AsyncParctice\obj\Debug\netcoreapp3.1\AsyncParctice.AssemblyInfoInputs.cache
+D:\github\CSharpLearning\AsyncParctice\AsyncParctice\obj\Debug\netcoreapp3.1\AsyncParctice.AssemblyInfo.cs
+D:\github\CSharpLearning\AsyncParctice\AsyncParctice\obj\Debug\netcoreapp3.1\AsyncParctice.csproj.CoreCompileInputs.cache
+D:\github\CSharpLearning\AsyncParctice\AsyncParctice\obj\Debug\netcoreapp3.1\AsyncParctice.dll
+D:\github\CSharpLearning\AsyncParctice\AsyncParctice\obj\Debug\netcoreapp3.1\AsyncParctice.pdb
