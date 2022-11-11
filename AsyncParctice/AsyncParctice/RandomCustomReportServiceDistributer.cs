@@ -7,7 +7,7 @@ namespace AsyncParctice
     /// <summary>
     /// this Distributer distributed requests to services in list randomly.
     /// </summary>
-    public class RandomCustomReportServiceDistributer
+    public class RandomCustomReportServiceDistributer : ICustomReportService
     {
         /// <summary>
         /// a list contains several CustomReportServices.
@@ -17,7 +17,7 @@ namespace AsyncParctice
         /// <summary>
         /// a object to generate random number.
         /// </summary>
-        private Random RandomNumberGenerator;
+        private Random RandomGenerator;
 
         /// <summary>
         /// constructor
@@ -25,8 +25,8 @@ namespace AsyncParctice
         /// <param name="customReportServices"> a list of ICustomReportServices </param>
         public RandomCustomReportServiceDistributer(List<ICustomReportService> customReportServices)
         {
-            CustomReportServices = customReportServices;
-            RandomNumberGenerator = new Random();
+            CustomReportServices = new List<ICustomReportService>(customReportServices);
+            RandomGenerator = new Random();
         }
 
         /// <summary>
@@ -36,7 +36,7 @@ namespace AsyncParctice
         /// <returns> a CustomReportResult object contains result from server. </returns>
         public async Task<CustomReportResult> GetCustomReport(CustomReportRequest request)
         {
-            return await CustomReportServices[RandomNumberGenerator.Next() % CustomReportServices.Count].GetCustomReport(request);
+            return await CustomReportServices[RandomGenerator.Next(0, CustomReportServices.Count)].GetCustomReport(request);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace AsyncParctice
@@ -21,7 +22,7 @@ namespace AsyncParctice
         /// <summary>
         /// how many requests are in service's queue.
         /// </summary>
-        public int CurrentRequestQuantity { get; private set; }
+        private int CurrentRequestQuantity;
 
         /// <summary>
         /// constructor
@@ -42,16 +43,15 @@ namespace AsyncParctice
         /// <returns> a CustomReportResult object contains result from server. </returns>
         public async Task<CustomReportResult> GetCustomReport(CustomReportRequest request)
         {
-            if (CurrentRequestQuantity >= MaxRequests)
+            if ( Interlocked.Increment(ref CurrentRequestQuantity) > MaxRequests)
             {
                 throw new CustomReportServiceException("Requests is full");
             }
             else 
             {
-                CurrentRequestQuantity += 1;
                 var result = new CustomReportResult { IsCompleted = true };
                 await Task.Delay(AvgResponseTime);
-                CurrentRequestQuantity -= 1;
+                Interlocked.Decrement(ref CurrentRequestQuantity);
                 return result;
             }
         }

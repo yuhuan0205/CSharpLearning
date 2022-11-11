@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Diagnostics;
 using System;
+using System.Threading;
 
 namespace UnitTest
 {
@@ -97,17 +98,29 @@ namespace UnitTest
         {
             //Arrange
             CustomReportRequest request = new CustomReportRequest();
-            ICustomReportService service = new MockCustomReportService(100, 3);
-            
+            ICustomReportService service = new MockCustomReportService(100, 50);
             //Act
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 100; i++)
             {
                 service.GetCustomReport(request);
             }
-
             //Assert
             Assert.ThrowsAsync<CustomReportServiceException>(async () => await service.GetCustomReport(request));
         }
 
+        [Test]
+        public async Task ResourceBasedDistributeTest() 
+        {
+            List<Task> tasks = new List<Task>();
+            CustomReportRequest request = new CustomReportRequest();
+            List<ICustomReportService> services = new List<ICustomReportService> { new MockCustomReportService(200, 10), new MockCustomReportService(200, 10) };
+            List<int> maxRequests = new List<int> { 5, 10 };
+            ICustomReportService loadBalancer = new ResourceBasedCustomReportServiceDistributer(services, maxRequests);
+            for ( int i = 0; i<60; i++)
+            {
+                tasks.Add(loadBalancer.GetCustomReport(request));
+            }
+            Task.WaitAll(tasks.ToArray());
+        }
     }
 }
