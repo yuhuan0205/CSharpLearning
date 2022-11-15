@@ -8,7 +8,7 @@ namespace AsyncParctice
     /// <summary>
     /// a object disstributes requests based on resource.
     /// </summary>
-    public class ResourceBasedCustomReportServiceDistributer : ICustomReportService
+    public class SemaphoreCustomReportServiceDistributer : ICustomReportService
     {
         /// <summary>
         /// the resource of service.
@@ -25,7 +25,7 @@ namespace AsyncParctice
         /// </summary>
         /// <param name="services"> services </param>
         /// <param name="maxRequests"> each service's max requests number. </param>
-        public ResourceBasedCustomReportServiceDistributer(List<ICustomReportService> services, List<int> maxRequests) 
+        public SemaphoreCustomReportServiceDistributer(List<ICustomReportService> services, List<int> maxRequests) 
         {
             if (services.Count != maxRequests.Count)
             {
@@ -54,8 +54,7 @@ namespace AsyncParctice
         public async Task<CustomReportResult> GetCustomReport(CustomReportRequest request) 
         {
             await semaphore.WaitAsync();
-            ICustomReportService service;
-            AvailableServices.TryTake(out service);
+            AvailableServices.TryTake(out ICustomReportService service);
             CustomReportResult result = await service.GetCustomReport(request);
             AvailableServices.Add(service);
             semaphore.Release();
