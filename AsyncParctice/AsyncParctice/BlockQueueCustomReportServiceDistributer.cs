@@ -12,17 +12,12 @@ namespace AsyncParctice
         /// <summary>
         /// the resource of service.
         /// </summary>
-        private ConcurrentBag<(CustomReportRequest, TaskCompletionSource<CustomReportResult>)> BlockingQueue;
+        private ConcurrentBag<(CustomReportRequest request, TaskCompletionSource<CustomReportResult> taskCompletionSource)> TaskBag;
 
         /// <summary>
         /// block request when service are all busy.
         /// </summary>
         private SemaphoreSlim Resources;
-
-        /// <summary>
-        /// block request when service are all busy.
-        /// </summary>
-        private SemaphoreSlim Requests;
 
         /// <summary>
         /// constructor
@@ -38,7 +33,7 @@ namespace AsyncParctice
             else
             {
                 ConcurrentQueue<ICustomReportService> servicesQueue = new ConcurrentQueue<ICustomReportService>(services);
-                BlockingQueue = new ConcurrentBag<(CustomReportRequest, TaskCompletionSource<CustomReportResult>)>();
+                TaskBag = new ConcurrentBag<(CustomReportRequest, TaskCompletionSource<CustomReportResult>)>();
 
                 //counting the upbound of the requests.
                 int totalRequests = 0;
@@ -48,7 +43,6 @@ namespace AsyncParctice
                 }
 
                 Resources = new SemaphoreSlim(0, totalRequests);
-                Requests = new SemaphoreSlim(totalRequests);
 
                 for (int indexOfservices = 0; indexOfservices < services.Count; indexOfservices++)
                 {
@@ -68,12 +62,10 @@ namespace AsyncParctice
         /// <returns> a CustomReportResult object contains result from server. </returns>
         public async Task<CustomReportResult> GetCustomReport(CustomReportRequest request)
         {
-            await Requests.WaitAsync();
             TaskCompletionSource<CustomReportResult> tcs = new TaskCompletionSource<CustomReportResult>();
-            BlockingQueue.Add((request, tcs));
+            TaskBag.Add((request, tcs));
             Resources.Release();
             var result = await tcs.Task;
-            Requests.Release();
             return result;
         }
 
@@ -87,9 +79,16 @@ namespace AsyncParctice
             while (true)
             {
                 await Resources.WaitAsync();
-                BlockingQueue.TryTake(out var task);
-                var x = await service.GetCustomReport(task.Item1);
-                task.Item2.SetResult(x);
+                TaskBag.TryTake(out var task);
+                try
+                {
+                    var result = await service.GetCustomReport(task.request);
+                    task.taskCompletionSource.SetResult(result);
+                }
+                catch(Exception exception)
+                {
+                    task.taskCompletionSource.TrySetException(exception);
+                }
             }
         }
     }

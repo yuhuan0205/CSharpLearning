@@ -34,6 +34,7 @@ namespace AsyncParctice
         {
             string content = JsonSerializer.Serialize(request);
             HttpResponseMessage result = await Client.PostAsync("customreport", new StringContent(content, Encoding.UTF8, "application/json"));
+            result.EnsureSuccessStatusCode();
             string jsonString = await result.Content.ReadAsStringAsync();
             CustomReportResult customReport = JsonSerializer.Deserialize<CustomReportResult>(jsonString);
             return customReport;

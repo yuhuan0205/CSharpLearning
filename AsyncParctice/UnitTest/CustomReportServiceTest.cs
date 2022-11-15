@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System;
 using System.Threading;
 using System.Collections.Concurrent;
+using System.Linq;
 
 namespace UnitTest
 {
@@ -114,10 +115,10 @@ namespace UnitTest
         {
             List<Task> tasks = new List<Task>();
             CustomReportRequest request = new CustomReportRequest();
-            List<ICustomReportService> services = new List<ICustomReportService> { new MockCustomReportService(200, 20), new MockCustomReportService(200, 15) };
+            List<ICustomReportService> services = new List<ICustomReportService> { new MockCustomReportService(200, 5), new MockCustomReportService(200, 15) };
             List<int> maxRequests = new List<int> { 10, 10 };
-            ICustomReportService loadBalancer = new BlockQueueCustomReportServiceDistributer(services, maxRequests);
-            Parallel.For(0, 160, i =>
+            ICustomReportService loadBalancer = new SemaphoreCustomReportServiceDistributer(services, maxRequests);
+            Parallel.For(0, 20, i =>
              {
                  tasks.Add(loadBalancer.GetCustomReport(request));
              });

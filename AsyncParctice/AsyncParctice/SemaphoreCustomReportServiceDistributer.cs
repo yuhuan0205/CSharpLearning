@@ -1,5 +1,7 @@
-﻿using System.Collections.Concurrent;
+﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -18,7 +20,7 @@ namespace AsyncParctice
         /// <summary>
         /// a semaphore represents that whether the resource is available.
         /// </summary>
-        private SemaphoreSlim semaphore;
+        private SemaphoreSlim Semaphore;
 
         /// <summary>
         /// constructor
@@ -42,7 +44,8 @@ namespace AsyncParctice
                         AvailableServices.Add(Services[indexOfservices]);
                     }
                 }
-                semaphore = new SemaphoreSlim(AvailableServices.Count);
+
+                Semaphore = new SemaphoreSlim(AvailableServices.Count);
             }
         }
 
@@ -53,12 +56,19 @@ namespace AsyncParctice
         /// <returns> a CustomReportResult object contains result from server. </returns>
         public async Task<CustomReportResult> GetCustomReport(CustomReportRequest request) 
         {
-            await semaphore.WaitAsync();
+            await Semaphore.WaitAsync();
             AvailableServices.TryTake(out ICustomReportService service);
-            CustomReportResult result = await service.GetCustomReport(request);
-            AvailableServices.Add(service);
-            semaphore.Release();
-            return result;
+            CustomReportResult result;
+            try 
+            {
+                result  = await service.GetCustomReport(request);
+                return result;
+            }
+            finally
+            {
+                AvailableServices.Add(service);
+                Semaphore.Release();
+            }
         }
     }
 }
