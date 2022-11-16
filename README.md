@@ -39,6 +39,7 @@
 * 共用項目使用 static class 來讓全部的人都能使用
 * 用`string.Empty;`來表示空字串，而不是`"";`。
 * 在註解中使用`//TODO： //UNDONE： //HACK：`
+* 當程式中會出現可預期的例外狀況時，應使用try catch來捕捉例外，千萬不要return null，拋出例外給外面的人處理就好。
 
 ## ASP.Net 
 
@@ -238,3 +239,23 @@ virtual v.s. abstract
 
 decimal.ToString("G29") 可以 format，去除小數後面的0。
 
+```C#
+try
+{
+	Console.WriteLine("try begin");
+	var x = 10/0;
+	Console.WriteLine("try End");
+}
+catch(Exception e)
+{
+	Console.WriteLine("catch begin");
+	return 0;
+
+}
+finally
+{
+	Console.WriteLine("finally begin");
+}
+
+// try begin; catch begin; finally begin; return.
+```

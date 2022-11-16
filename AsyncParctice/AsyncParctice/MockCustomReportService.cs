@@ -43,7 +43,7 @@ namespace AsyncParctice
         /// <returns> a CustomReportResult object contains result from server. </returns>
         public async Task<CustomReportResult> GetCustomReport(CustomReportRequest request)
         {
-            if ( Interlocked.Increment(ref CurrentRequestQuantity) > MaxRequests)
+            if (Interlocked.Increment(ref CurrentRequestQuantity) > MaxRequests)
             {
                 throw new CustomReportServiceException("Requests is full");
             }

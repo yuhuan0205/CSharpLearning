@@ -150,3 +150,8 @@ public class Singleton
 壞處：
 * 不能將一般類別轉成Monostate
 * 建構跟解構耗時
+
+## Producer / Consumer Pattern
+適用於多執行緒(或非同步)，其目的在於，當生產者產生數據的速度與消費者消化數據的速度不一致時。
+透過建立一個共用的Buffer來緩衝數據的量(使用Semaphore來管制)。需要注意的是，
+Buffer需使用執行緒安全的集合，以防止Race Condition。
