@@ -28,15 +28,45 @@ public async Task<Memberinfo> GetInfo(int id)
 * 待補充
 
 ## MemberService
-summary：
-* Ban Service (封鎖使用者)
-* Relationship Service(追蹤跟封鎖關係查詢)
-* Serach Service (搜尋使用者)
-* Community Service (管理社團成員) 
+APIs：
+* Ban Controller (封鎖使用者)
+* Relationship Controller(追蹤跟封鎖關係查詢)
+* Serach Controller (搜尋使用者)
+* Community Controller (管理社團成員) 
 
 ## Space Service
-summary：
-* Space Service (管理Space，類似 Discord 的 Server)
-* Board Service (管理Board，類似 Discord Server 裡的 Channel)
-* Member Service (管理單一會員的權限)
-* Customized Auth Service (新增權限、身分組)
+APIs：
+* Space Controller (管理Space，類似 Discord 的 Server)
+* Board Controller (管理Board，類似 Discord Server 裡的 Channel)
+* Member Controller (管理單一會員的權限)
+* Customized Auth Controller (新增權限、身分組)
+
+
+# 股市爆料同學會概觀
+
+## APIs
+* Article Controller (發文、取文、刪文，跟使用者權限等商業邏輯混在一起。)
+* Channel Controller
+* Collection Controller
+* Columnist Controller
+* Comment Controller
+* CommentInteractive Controller
+* Group Article Controller
+* Group Controller
+* Group Member Controller
+* Interactive Controller
+* Light Finance Controller
+* Member Controller
+* Notify Controller
+* Notify Setting Controller
+* Offcial Controller
+* Offcial Subscrber Controller
+* Pronoted Article Controller
+* Rank Controller
+* Rating Controller
+* Relationship Controller
+* Report Controller
+* Role Controller
+* Stock Report Controller
+* Support Controller
+* Vote Controller
