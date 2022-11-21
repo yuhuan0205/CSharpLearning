@@ -34,6 +34,21 @@ await Database.HashSetAsync( key, ( (IEnumerable<KeyValuePair<string, JToken>>)j
 // if time is over, delete cache. 
 await Database.KeyExpireAsync( key, DateTime.Now + TimeSpan.FromDays( 1 ) );
 
+//神奇的static
+public static class Test
+{
+    public static void Foo(this int x)
+    {
+        Console.WriteLine(x);
+    }
+}
+
+int x = 0;
+x.Foo();
+x = 3;
+x.Foo();
+//0
+//3
 ```
 ## 流程
 
