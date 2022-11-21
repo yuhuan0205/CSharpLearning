@@ -1,6 +1,11 @@
 # 社群小組微服務功能概覽
 
 ## The Knowledge After Review 
+
+命名相關：
+* Service => 商業邏輯層
+* Provider => 資料存取層(只針對資料表存取)
+
 ```C#
 // Name 僅僅只是代表該Route的名字。
 // ProducesResponseType 表示回傳的資料類型，經常用於Swagger上
