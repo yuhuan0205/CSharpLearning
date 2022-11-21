@@ -19,7 +19,26 @@ public async Task<Memberinfo> GetInfo(int id)
         return NotFound();
     }
 }
+
+//Redis 操作
+using StackExchange.Redis;
+var DataBase = ConnectionMultiplexer.Connect("IP address");
+
+//get data from cache
+var hashValues = await Database.HashGetAllAsync( key );
+
+// add data into cache
+await Database.HashSetAsync( key, ( (IEnumerable<KeyValuePair<string, JToken>>)jObject ).Select( keyValuePair => new HashEntry( keyValuePair.Key, keyValuePair.Value.ToString() ) ).ToArray() );
+
+// set cache store time.
+// if time is over, delete cache. 
+await Database.KeyExpireAsync( key, DateTime.Now + TimeSpan.FromDays( 1 ) );
+
 ```
+## 流程
+
+1. 去Redis取資料 (using StackExchange.Redis)
+2. 否則去MongoDB取資料
 
 ## 架構
 * MemberService
